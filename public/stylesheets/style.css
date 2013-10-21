@@ -1,0 +1,41 @@
+pre{
+    display: block;
+    padding: 9.5px;
+    margin: 0 0 10px;
+    font-size: 13px;
+    line-height: 1.428571429;
+    color: #37414c;
+    word-break: break-all;
+    word-wrap: break-word;
+    background-color: #ece9d7;
+    border: 1px solid #45515f;
+    border-radius: 4px;
+    white-space: pre-wrap;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    zoom: 1;
+}
+code{
+    color: #fff;
+    background-color: #d17b7b;
+    padding: 2px 4px;
+    font-size: 90%;
+    white-space: nowrap;
+    border-radius: 4px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.IamMusicMan{
+    height: 60px;
+    color: #fff;
+    background-color: #37414c;
+    padding: 2px 4px;
+    font-size: 90%;
+    white-space: nowrap;
+    border-radius: 4px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}

@@ -1,0 +1,29 @@
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothiccoding.css);
+
+/*html tag dependency*/
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+    text-transform: none;   /*supervillain 테마는 h태그에서 자꾸 대문자화 시킨다. 없애자*/
+    font-family:'Nanum Gothic Coding';
+    font-weight: 500;
+    line-height: 1.1;
+}
+html, body { height: 100%; margin: 0; padding:0;  font-family: 'Nanum Gothic Coding'; }
+
+a.noneEffect{text-decoration: none; color: inherit;}
+.noneEffect:hover{opacity: 0.8;}
+/*bootstrap dependency*/
+.modal-header, modal-body, .modal-footer{clear:both;}
+.navbar {border-bottom:none;}
+.navbar .navbar-brand{font-size: 16px;}
+.nav-tabs{margin-bottom: 0px;}
