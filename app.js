@@ -41,10 +41,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
-mongoose.connect('mongodb://localhost:27017');
+/*mongoose.connect('mongodb://localhost:27017');
 mongoose.connection.on('open', function() {
     console.log('Connected to Mongoose');
-});
+});*/
 
 app.get('/',routes.index);
 app.get('/pdf',routes.pdf);
