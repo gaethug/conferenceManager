@@ -1,0 +1,387 @@
+#pdfBody{
+    margin: 0;
+    padding: 0;
+
+}
+.A4WRAPPER{
+    position:   relative;
+    font-family:'올레체M, Malgun Gothic';
+    /*font-family: "나눔고딕", "맑은 고딕", "돋움", "굴림";*/
+    page-break-after:always;
+}
+.A4WRAPPER.smallsize{
+    margin-top:1.1cm;  /*기본 1cm, fuji Xerox 프린터 사용시 0.9cm  HP 1.1*/
+    margin-left:1.5cm;
+    width:      19.5cm;
+    height:     27.7cm;
+}
+.A4WRAPPER.mediumsize{
+    margin-top:1cm;
+    margin-left:0.9cm;
+    width:      20.1cm;
+    height:     27.7cm;
+ }
+.A4WRAPPER.largesize{
+    margin-top:1cm;
+    margin-left:0.9cm;
+    width:      20.1cm;
+    height:     27.7cm;
+}
+.A4WRAPPER  .item_small .back{
+    width: 9cm;
+    height: 6cm;
+    overflow: hidden;
+}
+.A4WRAPPER  .item_small .back img{
+    width: 100%;
+    height: 100%;
+}
+.A4WRAPPER  .item_small .front{
+    position: absolute;
+    top:0px;
+    left: 0px;
+    width: 9cm;
+    height: 6cm;
+}
+
+.A4WRAPPER  .item_medium .back img{
+    width: 9.6cm;
+    height: 12.5cm;
+}
+.A4WRAPPER  .item_medium .front{
+    position: absolute;
+    top:0px;
+    left: 0px;
+    width: 9.6cm;
+    height: 12.5cm;
+}
+.A4WRAPPER  .item_large .back img{
+    width: 19.2cm;
+    height: 12.5cm;
+}
+.A4WRAPPER  .item_large .front{
+    position: absolute;
+    top:0px;
+    left: 0px;
+    width: 9.6cm;
+    height: 12.5cm;
+}
+
+.A4WRAPPER .item_small, .A4WRAPPER .item_small_eng{
+    position: relative;
+    width: 9cm;
+    height: 6cm;
+    float: left;
+}
+.A4WRAPPER .item_medium{
+    position: relative;
+    width: 9.6cm;
+    height: 12.5cm;
+    float: left;
+}
+.A4WRAPPER .item_large{
+    position: relative;
+    width: 19.2cm;
+    height: 12.5cm;
+    float: left;
+}
+
+
+/*small KT 20130128*/
+
+/*#A4WRAPPER .item_small .top{
+    margin: 0 auto;
+    height:2cm;
+    vertical-align:middle;
+	display:table-cell;
+	padding:0 3cm 0 0.5cm;
+}
+#A4WRAPPER .item_small .top .event{
+	width:7.5cm;
+    font-size: 20px;
+	font-weight:bold;
+	color:#fff;
+	font-family:'올레체M, Malgun Gothic';
+}
+#A4WRAPPER .item_small .middle{
+    margin: 1.5cm 0 0 0.9cm;
+    text-align: left;
+}
+#A4WRAPPER .item_small .middle .company{
+	font-size:24px;
+	font-weight:bold;
+	font-family:'올레체M, Malgun Gothic';
+}
+#A4WRAPPER .item_small .bottom{
+    margin: 0.2cm 0 0 0.9cm;
+    text-align: left;
+}
+#A4WRAPPER .item_small .bottom .name{
+	font-size:40px;
+	font-weight:bold;
+	font-family:'올레체M, Malgun Gothic';
+	letter-spacing:0.2em;
+}
+#A4WRAPPER .item_small .bottom .title{
+	font-size:20px;
+	font-weight:bold;
+	font-family:'올레체M, Malgun Gothic';
+}*/
+
+/*small normal*/
+
+#A4WRAPPER .item_small .top{
+    margin: 0 auto;
+    height:2.6cm;
+    vertical-align:middle;
+	display:table-cell;
+	padding:0 3cm 0 0.5cm;
+    font-size: 20px;
+}
+#A4WRAPPER .item_small .top .event{
+	width:7.5cm;
+	font-weight:bold;
+	color:#fff;
+    /*font-family: "나눔고딕", "맑은 고딕", "돋움", "굴림";*/
+    /*font-family:'올레체M, Malgun Gothic';*/
+/*	font-family:'Malgun Gothic';*/
+    font-size: 100%;
+}
+#A4WRAPPER .item_small .middle{
+    margin: 0.4cm 0 0.2cm 0;
+    text-align: center;
+    font-size:24px;
+}
+#A4WRAPPER .item_small .middle .company{
+	font-weight:bold;
+    /*font-family: "나눔고딕", "맑은 고딕", "돋움", "굴림";*/
+    /*font-family:'올레체M, Malgun Gothic';*/
+/*	font-family:'Malgun Gothic';*/
+    font-size: 100%;
+}
+#A4WRAPPER .item_small .bottom{
+    margin: 0 auto;
+    text-align: center;
+    font-size:42px;
+}
+#A4WRAPPER .item_small .bottom .name{
+	font-weight:bold;
+    /*font-family: "나눔고딕", "맑은 고딕", "돋움", "굴림";*/
+    /*font-family:'올레체M, Malgun Gothic';*/
+/*	font-family:'Malgun Gothic';
+*/	letter-spacing:0.3em;
+    font-size: 100%;
+}
+#A4WRAPPER .item_small .bottom .title{
+	font-weight:bold;
+    /*font-family: "나눔고딕", "맑은 고딕", "돋움", "굴림";*/
+    /*font-family:'올레체M, Malgun Gothic';*/
+/*	font-family:'Malgun Gothic';*/
+    font-size: 60%;
+}
+
+/*item_small_eng*/
+
+#A4WRAPPER .item_small_eng .top{
+    margin: 0 auto;
+    height:2.1cm;
+    vertical-align:middle;
+	display:table-cell;
+	padding:0 3cm 0 0.5cm;
+}
+#A4WRAPPER .item_small_eng .top .event{
+	width:7.5cm;
+    font-size: 20px;
+	font-weight:bold;
+	color:#fff;
+    /*font-family: "나눔고딕", "맑은 고딕", "돋움", "굴림";*/
+    /*font-family:'올레체M, Malgun Gothic';*/
+/*	font-family:'Malgun Gothic';*/
+}
+#A4WRAPPER .item_small_eng .middle{
+    margin: 0.7cm auto 0.3cm;
+    text-align: center;
+}
+#A4WRAPPER .item_small_eng .middle .company{
+	font-size:22px;
+	font-weight:bold;
+    /*font-family: "나눔고딕", "맑은 고딕", "돋움", "굴림";*/
+    /*font-family:'올레체M, Malgun Gothic';*/
+/*	font-family:'Malgun Gothic';*/
+}
+#A4WRAPPER .item_small_eng .bottom{
+    margin: 0 auto;
+    text-align: center;
+}
+#A4WRAPPER .item_small_eng .bottom .name{
+	font-size:30px;
+	font-weight:bold;
+    /*font-family: "나눔고딕", "맑은 고딕", "돋움", "굴림";*/
+    /*font-family:'올레체M, Malgun Gothic';*/
+/*	font-family:'Malgun Gothic';*/
+}
+#A4WRAPPER .item_small_eng .bottom .title{
+	font-size:16px;
+	font-weight:bold;
+	/*font-family: "나눔고딕", "맑은 고딕", "돋움", "굴림";*/
+    /*font-family:'올레체M, Malgun Gothic';*/
+/*	font-family:'Malgun Gothic';*/
+}
+
+/*medium*/
+
+#A4WRAPPER .item_medium .top{
+    margin: 0 auto;
+    height:5cm;
+    vertical-align:middle;
+	display:table-cell;
+	padding:0 3cm 0 0.5cm;
+    font-size: 24px;
+}
+#A4WRAPPER .item_medium .top .event{
+	width:8cm;
+    font-size: 100%;
+	font-weight:bold;
+	color:#fff;
+	/*font-family: "나눔고딕", "맑은 고딕", "돋움", "굴림";*/
+    /*font-family:'올레체M, Malgun Gothic';*/
+/*	font-family:'Malgun Gothic';*/
+}
+#A4WRAPPER .item_medium .middle{
+    margin: 1.3cm auto 0.3cm;
+    text-align: center;
+    font-size:24px;
+}
+#A4WRAPPER .item_medium .middle .company{
+    font-size:100%;
+	font-weight:bold;
+	/*font-family: "나눔고딕", "맑은 고딕", "돋움", "굴림";*/
+    /*font-family:'올레체M, Malgun Gothic';*/
+/*	font-family:'Malgun Gothic';*/
+}
+#A4WRAPPER .item_medium .bottom{
+    margin: 0 auto;
+    text-align: center;
+    font-size:46px;
+}
+#A4WRAPPER .item_medium .bottom .name{
+    font-size:100%;
+	font-weight:bold;
+	/*font-family: "나눔고딕", "맑은 고딕", "돋움", "굴림";*/
+    /*font-family:'올레체M, Malgun Gothic';*/
+/*	font-family:'Malgun Gothic';*/
+	letter-spacing:0.5em;
+	margin-bottom:0.5cm;
+}
+#A4WRAPPER .item_medium .bottom .title{
+	font-size:60%;
+	font-weight:bold;
+	/*font-family: "나눔고딕", "맑은 고딕", "돋움", "굴림";*/
+    /*font-family:'올레체M, Malgun Gothic';*/
+/*	font-family:'Malgun Gothic';*/
+}
+
+
+/*후지전기 large*/
+/*#A4WRAPPER .item_large .wrap{
+    width: 9.6cm;
+    height: 12.5cm;
+}
+#A4WRAPPER .item_large .wrap .top{
+    margin: 0 auto;
+    height:5cm;
+    vertical-align:middle;
+	display:table-cell;
+	padding:0 3cm 0 0.5cm;
+}
+#A4WRAPPER .item_large .wrap .top .event{
+	width:7.5cm;
+    font-size: 24px;
+	font-weight:bold;
+	color:#fff;
+	font-family:'Verdana';
+}
+#A4WRAPPER .item_large .wrap .middle{
+    margin: 1.3cm auto 0.3cm;
+    text-align: left;
+	padding-left:0.8cm;
+}
+#A4WRAPPER .item_large .wrap .middle .company{
+	font-size:24px;
+
+	font-family:'Verdana';
+}
+#A4WRAPPER .item_large .wrap .bottom{
+    margin: 0 auto;
+    text-align: left;
+	padding-left:0.8cm;
+}
+#A4WRAPPER .item_large .wrap .bottom .name{
+	font-size:34px;
+
+	font-family:'Verdana';
+	letter-spacing:-0.07em;
+	margin-bottom:0.5cm;
+}
+#A4WRAPPER .item_large .wrap .bottom .title{
+	font-size:24px;
+
+	font-family:'Verdana';
+}*/
+
+
+/*large*/
+#A4WRAPPER .item_large .wrap{
+    width: 9.6cm;
+    height: 12.5cm;
+}
+#A4WRAPPER .item_large .wrap .top{
+    margin: 0 auto;
+    height:5cm;
+    vertical-align:middle;
+	display:table-cell;
+	padding:0 3cm 0 0.5cm;
+    font-size: 24px;
+}
+#A4WRAPPER .item_large .wrap .top .event{
+	width:8cm;
+    font-size: 100%;
+	font-weight:bold;
+	color:#fff;
+	/*font-family: "나눔고딕", "맑은 고딕", "돋움", "굴림";*/
+    /*font-family:'올레체M, Malgun Gothic';*/
+/*	font-family:'Malgun Gothic';*/
+}
+#A4WRAPPER .item_large .wrap .middle{
+    margin: 1.3cm auto 0.3cm;
+    text-align: center;
+    font-size:24px;
+}
+#A4WRAPPER .item_large .wrap .middle .company{
+    font-size:100%;
+	font-weight:bold;
+	/*font-family: "나눔고딕", "맑은 고딕", "돋움", "굴림";*/
+    /*font-family:'올레체M, Malgun Gothic';*/
+/*	font-family:'Malgun Gothic';*/
+}
+#A4WRAPPER .item_large .wrap .bottom{
+    margin: 0 auto;
+    text-align: center;
+    font-size:46px;
+}
+#A4WRAPPER .item_large .wrap .bottom .name{
+    font-size:100%;
+	font-weight:bold;
+	/*font-family: "나눔고딕", "맑은 고딕", "돋움", "굴림";*/
+    /*font-family:'올레체M, Malgun Gothic';*/
+/*	font-family:'Malgun Gothic';*/
+	letter-spacing:0.5em;
+	margin-bottom:0.5cm;
+}
+#A4WRAPPER .item_large .wrap .bottom .title{
+	font-size:60%;
+	font-weight:bold;
+	/*font-family: "나눔고딕", "맑은 고딕", "돋움", "굴림";*/
+    /*font-family:'올레체M, Malgun Gothic';*/
+/*	font-family:'Malgun Gothic';*/
+}

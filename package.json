@@ -7,6 +7,14 @@
   },
   "dependencies": {
     "express": "3.4.0",
-    "jade": "*"
+    "jade": "*",
+    "phantomjs": "~1.9.2-2",
+    "qrcode-npm": "0.0.3",
+    "csvtojson": "~0.1.4",
+    "excel-parser": "~0.2.1",
+    "excel": "0.0.60",
+    "csv": "~0.3.6",
+    "mongoose": "~3.6.20",
+    "msexcel-builder": "0.0.2"
   }
 }

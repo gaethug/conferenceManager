@@ -5,28 +5,35 @@
         <div class="form-horizontal" role="form">
             <div class="form-group">
                 <label class="col-lg-2 control-label" >이름</label>
-                <div class="col-lg-10"><input type="text" class="form-control" placeholder="제목"></div>
+                <div class="col-lg-10"><input type="text" ng-model = "participant.Name" class="form-control" placeholder="이름"></div>
             </div>
-            <div class="form-group">
+            <!--<div class="form-group">
                 <label class="col-lg-2 control-label" >이메일</label>
-                <div class="col-lg-10"><input type="text" class="form-control" placeholder="제목"></div>
-            </div>
+                <div class="col-lg-10"><input type="text" ng-model = "participant.Email" class="form-control" placeholder="이메일"></div>
+            </div>-->
             <div class="form-group">
                 <label class="col-lg-2 control-label">회사</label>
-                <div class="col-lg-10"><input type="text" class="form-control" placeholder="제목"></div>
+                <div class="col-lg-10"><input type="text" ng-model = "participant.Company" class="form-control" placeholder="회사"></div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-2 control-label">부서</label>
+                <div class="col-lg-10"><input type="text" ng-model = "participant.Depart" class="form-control" placeholder="부서"></div>
             </div>
             <div class="form-group">
                 <label class="col-lg-2 control-label">직책</label>
-                <div class="col-lg-10"><input type="text" class="form-control" placeholder="제목"></div>
+                <div class="col-lg-10"><input type="text" ng-model = "participant.Title" class="form-control" placeholder="직책"></div>
             </div>
-            <div class="form-group">
+            <!--<div class="form-group">
                 <label class="col-lg-2 control-label" >전화번호</label>
-                <div class="col-lg-10"><input type="text" class="form-control" placeholder="제목"></div>
-
+                <div class="col-lg-10"><input type="text" ng-model = "participant.Phone" class="form-control" placeholder="전화번호"></div>
+            </div>-->
+            <div class=" pull-right">
+                <button type="button" class="btn btn-danger" ng-click="createUser()">추가하기</button>
             </div>
         </div>
-    </div>
+        <div ng-bind-html="qrcodebinary"></div>
 
+    </div>
 </div>
 <div class="col-lg-2" >
 </div>

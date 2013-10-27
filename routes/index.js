@@ -7,6 +7,10 @@ exports.index = function(req, res){
     console.log("index");
     res.sendfile('public/index.html');
 };
+exports.pdf = function(req, res){
+    console.log("index");
+    res.sendfile('public/pdf.html');
+};
 exports.fragments = function (req, res) {
     console.log(req.params.type);
     console.log(req.params.name);
