@@ -13,7 +13,14 @@ var cm = angular.module('CM',['ngAnimate','ngCookies','ngResource','ngRoute','ng
 
         $routeProvider.
             when('/', {templateUrl:'/fragments/main/main'}).
-            when('/participantCreate', {controller:'participantCreateCtrl', templateUrl:'/fragments/participant/create'}).
+            /*when('/participantCreate', {controller:'participantCreateCtrl', templateUrl:'/fragments/participant/create'}).
+            when('/participantList', {controller:'participantListCtrl', templateUrl:'/fragments/participant/list'}).*/
+            when('/basic', {templateUrl:'/fragments/participant/basic'}).
+            when('/layout', {templateUrl:'/fragments/participant/layout'}).
+            when('/common', {templateUrl:'/fragments/participant/common'}).
+            when('/element', {templateUrl:'/fragments/participant/element'}).
+            when('/basic', {templateUrl:'/fragments/participant/basic'}).
+            when('/participantList', {controller:'participantListCtrl', templateUrl:'/fragments/participant/list'}).
             when('/participantList', {controller:'participantListCtrl', templateUrl:'/fragments/participant/list'}).
             otherwise({redirectTo:'/'});
         $locationProvider.html5Mode(true);
