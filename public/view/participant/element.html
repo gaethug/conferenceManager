@@ -1,7 +1,7 @@
 <div class="col-lg-3">
-
 </div>
 <div class="col-lg-9">
+    <div class="row">
     <div class="bf-docs-section">
         <h2>Basic nav list</h2>
         <p>Take a list of links and add <code>class="nav nav-list"</code>:</p>
@@ -50,7 +50,6 @@
             </ul>
         </div>
     </div>
-
     <div class="bf-docs-section">
         <h2 id="navbar-default">Base navbar</h2>
         <p>Navbars are responsive meta components that serve as navigation headers for your application or site. They begin collapsed (and are toggleable) in mobile views and become horizontal as the available viewport width increases.</p>
@@ -300,62 +299,6 @@
         </div>
     </div>
     <div class="bf-docs-section">
-        <h2>Component alignment</h2>
-        <p>Align nav links, forms, buttons, or text, using the <code>.navbar-left</code> or <code>.navbar-right</code> utility classes. Both classes will add a CSS float in the specified direction. For example, to align nav links, put them in a separate <code>&lt;ul&gt;</code> with the respective utility class applied.</p>
-        <p>These classes are mixin-ed versions of <code>.pull-left</code> and <code>.pull-right</code>, but they're scoped to media queries for easier handling of navbar components across device sizes.</p>
-        <h2>Optional display variations</h2>
-        <p>Fix the navbar to the top or bottom of the viewport with an additional class on the outermost div, <code>.navbar</code>. These will also remove rounded corners.</p>
-        <h3>Fixed to top</h3>
-        <p>Add <code>.navbar-fixed-top</code>.</p>
-        <h4 class="bf-example-title">Example</h4>
-        <div class="bf-example bf-navbar-top-example">
-            <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-                <!-- Brand and toggle get grouped for better mobile display -->
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex5-collapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="#">Title</a>
-                </div>
-                <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse navbar-ex5-collapse">
-                    <ul class="nav navbar-nav">
-                        <li class="active"><a href="#">Home</a></li>
-                        <li><a href="#">Link</a></li>
-                        <li><a href="#">Link</a></li>
-                    </ul>
-                </div><!-- /.navbar-collapse -->
-            </nav>
-        </div><!-- /example -->
-        <h3>Fixed to bottom</h3>
-        <p>Add <code>.navbar-fixed-bottom</code> instead.</p>
-        <h4 class="bf-example-title">Example</h4>
-        <div class="bf-example bf-navbar-bottom-example">
-            <nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
-                <!-- Brand and toggle get grouped for better mobile display -->
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex6-collapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="#">Title</a>
-                </div>
-
-                <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse navbar-ex6-collapse">
-                    <ul class="nav navbar-nav">
-                        <li class="active"><a href="#">Home</a></li>
-                        <li><a href="#">Link</a></li>
-                        <li><a href="#">Link</a></li>
-                    </ul>
-                </div><!-- /.navbar-collapse -->
-            </nav>
-        </div><!-- /example -->
         <h3>Static top navbar</h3>
         <p>Create a full-width navbar that scrolls away with the page by adding <code>.navbar-static-top</code>. Unlike the <code>.navbar-fixed-*</code> classes, you do not need to change any padding on the <code>body</code>.</p>
         <h4 class="bf-example-title">Example</h4>
@@ -383,5 +326,5 @@
             </nav>
         </div>
     </div>
-
+    </div>
 </div>

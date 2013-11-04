@@ -27,3 +27,15 @@ a.noneEffect{text-decoration: none; color: inherit;}
 .navbar {border-bottom:none;}
 .navbar .navbar-brand{font-size: 16px;}
 .nav-tabs{margin-bottom: 0px;}
+
+.bf-example{
+    margin-left: 0;
+    margin-right: 0;
+    border-radius: 4px;
+    background-color: #fff;
+    border-width: 1px;
+    border-color: #ddd;
+    box-shadow: none;
+    position: relative;
+    margin: 20px 0 40px;
+}

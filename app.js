@@ -8,6 +8,8 @@ var routes = require('./routes');
 var user = require('./routes/user');
 var http = require('http');
 var path = require('path');
+var passport = require('passport');
+var map = require('./maproutecontroller');
 var phantomjs = require('phantomjs');
 var child_process  = require("child_process");
 var qrCode = require('qrcode-npm');
@@ -20,11 +22,13 @@ var mongoose = require('mongoose');
 var fs = require('fs');
 var REQUEST_TIMEOUT = 30*1000;
 
-//var participantModel = require('../models/participant');
+var Member = require('./models/member.js');
+
+passport.use(Member.localStrategy);
+passport.serializeUser(Member.serializeUser);
+passport.deserializeUser(Member.deserializeUser);
 
 var app = express();
-
-
 // all environments
 app.set('port', process.env.PORT || 3000);
 app.set('views', __dirname + '/views');
@@ -34,35 +38,37 @@ app.use(express.logger('dev'));
 app.use(express.bodyParser());
 app.use(express.methodOverride());
 app.use(express.static(path.join(application_root, "public")));
-app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.cookieParser());
+app.use(express.cookieSession(
+    {
+        secret: process.env.COOKIE_SECRET || "Superdupersecret",
+        cookie: {maxAge: new Date(Date.now() + 30000)}
+    }));
+app.use(express.session({ secret: 'keyboard cat' }));
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(app.router);
+
+
+mongoose.connect('mongodb://localhost:27017');
+mongoose.connection.on('open', function() {
+    console.log('Connected to Mongoose');
+});
+
 
 // development only
 if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
-/*mongoose.connect('mongodb://localhost:27017');
-mongoose.connection.on('open', function() {
-    console.log('Connected to Mongoose');
-});*/
+
+
 
 app.get('/',routes.index);
 app.get('/pdf',routes.pdf);
 app.get('/fragments/:type/:name', routes.fragments);
 
 app.get('/excel', function(req, res){
-    /*excelParser.parse({
-        inFile: __dirname+'/public/userfiles/master.xls',
-        skipEmpty: true,
-        searchFor: {
-            term: ['my serach term'],
-            type: 'loose'
-        }
-    }, function(err, records){
-        if(err) console.error(err);
-
-        console.log(records);
-    });*/
     var opts ="" ;
     var workbook = excelbuilder.createWorkbook( __dirname+'/public/userfiles/','sample.xlsx');
     var sheet1 = workbook.createSheet('sheet1', 10, 12);
@@ -77,46 +83,6 @@ app.get('/excel', function(req, res){
         else
             console.log('congratulations, your workbook created');
     });
-
-
-    /*csv()
-        .from.path(__dirname+'/public/userfiles/imsi.csv', { delimiter: ',', escape: '"' })
-        .to.stream(fs.createWriteStream(__dirname+'/public/userfiles/test.txt'))
-        .transform( function(row){
-            row.unshift(row.pop());
-            //console.log(row);
-            return row;
-        })
-        .on('record', function(row,index){
-            //console.log('#'+index+' '+JSON.stringify(row));
-            console.log(row[0]);
-            console.log(row[1]);
-            console.log(row[2]);
-            console.log(row[3]);
-            var qrMSG = req.body.Name+" "+req.body.Company+" "+req.body.Depart+" "+req.body.Title;
-            var qr = qrCode.qrcode(4, 'M');
-            qr.addData(qrMSG);
-            qr.make();
-            var qrimgtag = qr.createTableTag(4);
-
-
-
-
-            //res.send({title:'QRCODE', qrcodeURL:row});
-        })
-        .on('close', function(count){
-            // when writing to a file, use the 'close' event
-            // the 'end' event may fire before the file has been written
-            console.log('Number of lines: '+count);
-        })
-        .on('error', function(error){
-            console.log(error.message);
-        });*/
-   /* parseXlsx(__dirname+'/public/userfiles/master.xls', function(err, data) {
-        if(err) throw err;
-        // data is an array of arrays
-        console.log(data);
-    });*/
 });
 app.post('/participant',function(req, res){
     console.log(req.body);
@@ -125,14 +91,14 @@ app.post('/participant',function(req, res){
     qr.addData(qrMSG);
     qr.make();
     var qrimgtag = qr.createTableTag(4);
-    //var idx=qrimgtag.indexOf("base64,") + 7;
-    // qrimgtag  = qrimgtag.substring(idx);
-    //idx = qrimgtag.indexOf('\"');
-    //console.log(qrimgtag.substring(0,idx));
-  //return qrimgtag.substring(0,idx);
     res.send({title:'QRCODE', qrcodeURL:qrimgtag});
 });
 
+var prefixes = ['members', 'events', 'surveys', 'emails'];
+
+prefixes.forEach(function(prefix) {
+    map.mapRoute(app, prefix);
+});
 
 var binPath = phantomjs.path;
 var childArgs = [
@@ -147,6 +113,21 @@ app.get('/convertPdf',function(req, res){   //convertPdf 요청이 오면 phanto
         console.log(stderr);
     })
 });
+var auth = require('./controllers/authController');
+app.post('/auth/login', auth.login);
+app.post('/auth/logout', auth.logout);
+app.get('/auth/login/success', function(req, res){
+    console.log("login SUccess");
+    console.log(req.session.passport.user);
+    res.send({user:req.session.passport.user , result:"SUCCESS"});
+});
+app.get('/auth/login/failure', function(req, res){
+    console.log("login Fail");
+    //console.log(res);
+    res.send({result:"FAIL"});
+});
+
+
 
 app.get('*', routes.index);
 http.createServer(app).listen(app.get('port'), function(){

@@ -2,9 +2,15 @@
 /*
  * GET home page.
  */
-
+var userRoles =  require('../public/javascripts/routingConfig').userRoles;
 exports.index = function(req, res){
     console.log("index");
+    if(req.user){
+        res.cookie('user', JSON.stringify(req.user));
+    }else{
+        res.cookie('user', JSON.stringify({role:userRoles.public}));
+    }
+
     res.sendfile('public/index.html');
 };
 exports.pdf = function(req, res){

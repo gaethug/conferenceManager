@@ -1,0 +1,40 @@
+<div class="col-lg-2" >
+</div>
+<div class="col-lg-8" >
+
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+            <tr>
+                <td>#</td>
+                <td>이름</td>
+                <td>아이디</td>
+                <td>생성 이벤트</td>
+                <td>생성 설문</td>
+                <td>생성 이메일</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat = "member in members">
+                <td>{{$index+1}}</td>
+                <td>{{member.Name}}</td>
+                <td>{{member.Id}}</td>
+                <td>{{member.Events.length}}</td>
+                <td>{{member.Surveys.length}}</td>
+                <td>{{member.Emails.length}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="col-lg-2" >
+
+    <div class="needLogin" ng-if="user.role.title == 'public'">
+
+    </div>
+    <div class="loggedin" ng-if="user.role.title != 'public'">
+        <div>{{user.Id}}</div>
+        <div>{{user.Name}}</div>
+        <button type="button" class="btn btn-block btn-primary" ng-click="logout()">로그아웃</button>
+    </div>
+</div>

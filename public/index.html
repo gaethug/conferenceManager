@@ -8,12 +8,13 @@
 
     <meta name="msvalidate.01" content="67615AF28B0F368A90A20802FCFE4371" />
     <title>Conference Manager</title>
-    <!--<link href="/stylesheets/bootstrap-stable_classicplus.css" rel="stylesheet" type="text/css" />-->
-    <link href="/stylesheets/bootstrap.css" rel="stylesheet" type="text/css" />
-    <link href="/stylesheets/bootstrap_earth.css" rel="stylesheet" type="text/css" />
+    <link href="/stylesheets/bootstrap-stable_classicplus.css" rel="stylesheet" type="text/css" />
+    <!--<link href="/stylesheets/bootstrap.css" rel="stylesheet" type="text/css" />-->
+    <!--<link href="/stylesheets/bootstrap_earth.css" rel="stylesheet" type="text/css" />-->
     <link href="/stylesheets/cm.css" rel="stylesheet" type="text/css" />
 
     <!--Libraries-->
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/0.10.0/lodash.min.js"></script>
     <script src="/libraries/jquery/jquery-1.9.0.js"></script>
     <script src="/libraries/socket.io.js"></script>
     <script src="/libraries/angularjs_1.2_rc2/angular.js"></script>
@@ -72,9 +73,15 @@
     <script src="/javascripts/directives/ui-map.js"></script>
     <!--<script src="/javascripts/directives/angular-masonry.js"></script>-->
 
+    <script src="/javascripts/routingConfig.js"></script>
+
     <script src="/javascripts/controller/cm.js"></script>
-    <script src="/javascripts/controller/cm_participantList.js"></script>
-    <script src="/javascripts/controller/cm_participantCreate.js"></script>
+    <script src="/javascripts/service/services.js"></script>
+
+
+    <script src="/javascripts/controller/cm_memberJoin.js"></script>
+    <script src="/javascripts/controller/cm_memberList.js"></script>
+
     <!--Angular Directives And Controllers-->
 
     <script>
@@ -117,35 +124,36 @@
     <div class="container ">
         <div class="row bodyRow" >
             <div class="col-lg-12" >
-                <!--<div class="page-header">
-                    <h1>
-                        <div ng-click="goMain()" class="ttwrPointer text-muted">
-                        <small>whatShall<span class="text-{{TabTheme}} glyphicon glyphicon-tree-deciduous"></span><span style="display: none">I</span>do?</small>
+                <header class="navbar navbar-inverse" role="banner"><!--navbar navbar-inverse navbar-fixed-top-->
+                    <div class="container">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-ex2-collapse">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <a class="navbar-brand" href="/" >통키</a>
                         </div>
-                    </h1>
+                        <nav class="collapse navbar-collapse navbar-ex2-collapse">
+                            <ul class="nav navbar-nav">
+                                <li><a href="/memberList">Member</a></li>
+                                <li><a href="/eventList">Event</a></li>
+                                <li><a href="/surveyList">Survey</a></li>
+                                <li><a href="/emailList">Email</a></li>
+                            </ul>
+                            <div class="navbar-form navbar-right">
+                                <button class="btn btn-default" ng-click="showLoginModal()" ng-if="user.role.title=='public'">
+                                    Login
+                                </button>
+                                <button class="btn btn-default" ng-click="logout()" ng-if="user.role.title!='public'">
+                                    Logout
+                                </button>
+                            </div>
+                        </nav>
+                    </div>
 
-                </div>-->
-                <nav class="navbar navbar-default" role="navigation"><!--navbar navbar-inverse navbar-fixed-top-->
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-ex2-collapse">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                        <a class="navbar-brand" href="/" >
-                            엘리먼트
-                        </a>
-                    </div>
-                    <div class="collapse navbar-collapse navbar-ex2-collapse">
-                        <ul class="nav navbar-nav">
-                            <li><a href="/basic">Basic</a></li>
-                            <li><a href="/layout">Layout</a></li>
-                            <li><a href="/common">Common</a></li>
-                            <li><a href="/element">Element</a></li>
-                        </ul>
-                    </div>
-                </nav>
+                </header>
             </div>
 
         </div>
