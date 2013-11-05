@@ -17,6 +17,8 @@
     "mongoose": "~3.6.20",
     "msexcel-builder": "0.0.2",
     "passport": "~0.1.17",
-    "passport-local": "~0.1.6"
+    "passport-local": "~0.1.6",
+    "connect": "~2.11.0",
+    "session-mongoose": "~0.3.2"
   }
 }

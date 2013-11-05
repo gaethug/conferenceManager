@@ -6,8 +6,7 @@
  * To change this template use File | Settings | File Templates.
  */
 var passport = require('passport');
-var AuthController = {
-
+module.exports = {
     // Login a user
     login: passport.authenticate('local', {
         successRedirect: '/auth/login/success',
@@ -17,27 +16,23 @@ var AuthController = {
     // on Login Success callback
     loginSuccess: function(req, res){
         console.log("login SUccess");
-        res.json({
-            success: true,
-            user: req.session.passport.user
-        });
+        console.log(req.session.passport);
+        req.session.cookie.expires = new Date(Date.now() + 30000);
+        res.send({user:req.session.passport.user , result:"SUCCESS"});
     },
 
     // on Login Failure callback
     loginFailure: function(req, res){
         console.log("login Fail,");
-        res.json({
-            success:false,
-            message: 'Invalid username or password.'
-        });
+        //console.log(res);
+        res.send({result:"FAIL"});
     },
 
     // Log out a user
     logout: function(req, res){
+        console.log("logout");
         req.logout();
         res.end();
     }
 
-};
-
-exports = module.exports = AuthController;
+}

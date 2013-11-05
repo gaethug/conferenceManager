@@ -6,14 +6,17 @@
  * To change this template use File | Settings | File Templates.
  */
 cm.controller('memberJoinCtrl',function($rootScope,$location, $http,$scope, Auth){
+    $scope.role = Auth.userRoles.user;
+    $scope.userRoles = Auth.userRoles;
+
     $scope.joinMember = function(){
         Auth.register({
             Name:$scope.member.Name,
             Id:$scope.member.Id,
-            Password:$scope.member.Password
+            Password:$scope.member.Password,
+            role:$scope.member.role
         }, function(data){
             console.log(data);
-
         },function(err){
             console.log(err);
         });

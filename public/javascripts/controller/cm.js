@@ -12,7 +12,7 @@ var cm = angular.module('CM',['ngAnimate','ngCookies','ngResource','ngRoute','ng
     }).config(function($routeProvider, $locationProvider,$httpProvider) {
         var access = routingConfig.accessLevels;
         $routeProvider.
-            when('/', {templateUrl:'/fragments/main/main', access : access.user}).
+            when('/', {templateUrl:'/fragments/main/main', access : access.public}).
             /*when('/participantCreate', {controller:'participantCreateCtrl', templateUrl:'/fragments/participant/create'}).
             when('/participantList', {controller:'participantListCtrl', templateUrl:'/fragments/participant/list'}).*/
             /*when('/basic', {templateUrl:'/fragments/participant/basic'}).
@@ -22,76 +22,61 @@ var cm = angular.module('CM',['ngAnimate','ngCookies','ngResource','ngRoute','ng
             when('/basic', {templateUrl:'/fragments/participant/basic'}).
             when('/participantList', {controller:'participantListCtrl', templateUrl:'/fragments/participant/list'}).
             when('/participantList', {controller:'participantListCtrl', templateUrl:'/fragments/participant/list'}).*/
-            when('/memberJoin', {controller:'memberJoinCtrl', templateUrl:'/fragments/member/create', access : access.admin}).
+            when('/memberJoin', {controller:'memberJoinCtrl', templateUrl:'/fragments/member/create', access : access.anon}).
             when('/memberList', {controller:'memberListCtrl', templateUrl:'/fragments/member/list', access : access.admin}).
-            when('/eventList', {controller:'participantListCtrl', templateUrl:'/fragments/event/list', access : access.user}).
-            when('/emailList', {controller:'participantListCtrl', templateUrl:'/fragments/email/list', access : access.user}).
-            when('/surveyList', {controller:'participantListCtrl', templateUrl:'/fragments/survey/list', access : access.user}).
+            when('/eventList', {controller:'eventListCtrl',templateUrl:'/fragments/event/list', access : access.public}).
+            when('/emailList', {controller:'emailListCtrl',templateUrl:'/fragments/email/list', access : access.public}).
+            when('/surveyList', { controller:'surveyListCtrl',templateUrl:'/fragments/survey/list', access : access.public}).
             otherwise({redirectTo:'/'});
         $locationProvider.html5Mode(true);
         $locationProvider.hashPrefix('!');
 
-        var interceptor = ['$rootScope','$location', '$q', function($rootScope,$location, $q) {
+        var interceptor = ['$rootScope','$q', function(scope, $q) {
             function success(response) {
+                var status = response.status;
+                if(response.config.url!=="/ping"){
+                    if(status == 203){
+                        scope.$broadcast('loginRequired');
+                    }
+                }
                 return response;
             }
-
             function error(response) {
-
-                if(response.status === 401) {
-                    //$location.path('/login');
-                    $rootScope.$broadcast('loginRequired');
-                    return $q.reject(response);
-                }
-                else {
-                    return $q.reject(response);
-                }
+                return $q.reject(response);
             }
-
             return function(promise) {
                 return promise.then(success, error);
             }
-        }];
 
+        }];
         $httpProvider.responseInterceptors.push(interceptor);
 
-
-    }).run(function($rootScope, $location, $dialog, Auth){
-        var access = routingConfig.accessLevels;
+    }).run(function($rootScope, $location, $http, Auth, $dialog){
         $rootScope.$on("$routeChangeStart", function (event, next, current) {
-            $rootScope.error = null;
-            if (!Auth.authorize(next.access)) {
-                if(Auth.isLoggedIn()){
-                    console.log("logged In");
-                }else{
-                    console.log("logged Out");
-                    $rootScope.$broadcast('loginRequired');
-                }
-            }
         });
         $rootScope.$on('loginRequired', function() {
-            $dialog.dialog({
-                templateUrl:  '/fragments/common/logginModal',
-                controller: 'loginCtrl'
-            }).open().then(function(result){
-                    if(result!="FAIL"){
-                    }
-                });
+            if(Auth.isLoggedIn()){
+                Auth.ping();    //클라이언트에서 로그인 상태인데 203이 떨어진다면 - 서버 세션 만료, 클라이언트는 모르는 상태
+                                //핑을 날린다.
+            }else{
+                $rootScope.User = {};
+            }
+
         });
     });
 
 cm.controller('MainCtrl',function($rootScope,$location, $http,$scope, $dialog, Auth){
-    $scope.user  = Auth.user;
-    $scope.userRoles = Auth.userRoles;
-    $scope.accessLevels = Auth.accessLevels;
-
-    console.log($scope.user);
-    console.log($scope.userRoles);
-    console.log($scope.accessLevels);
-
-
+    //$scope.User = Auth.user;
     $scope.showLoginModal = function(){
-        $rootScope.$broadcast('loginRequired');
+        $dialog.dialog({
+            templateUrl:  '/fragments/common/logginModal',
+            controller: 'loginCtrl'
+        }).open().then(function(result){
+                if(result!="FAIL"){
+
+                }
+            });
+        //$rootScope.$broadcast('loginRequired');
     };
     $scope.logout = function(){
         Auth.logout( function(data){

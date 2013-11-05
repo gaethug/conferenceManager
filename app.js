@@ -20,16 +20,39 @@ var parseXlsx = require('excel');
 var csv = require('csv');
 var mongoose = require('mongoose');
 var fs = require('fs');
-var REQUEST_TIMEOUT = 30*1000;
+var PassportLocalStrategy = require('passport-local').Strategy;
+passport.use(new PassportLocalStrategy(
+    {
+        usernameField: 'Id',
+        passwordField: 'Password'
+    },
+    function (username, password, done){
+        console.log(username +" " + password);
+        var Member = require('./models/member');
+        Member.findOne({Id: username}, function(err, user){
+            if (err) { return done(err); }
+            console.log(user);
+            if (!user){
+                return done(null, false, { message: 'User not found.'} );
+            }
+            if (user.Password != password){
+                console.log("not valid");
+                return done(null, false, { message: 'Incorrect password.'} );
+            }
 
-var Member = require('./models/member.js');
+            return done(null, user);
+        });
+    }
+));
+passport.serializeUser(function(user, done) {
+    return done(null, user);
+});
 
-passport.use(Member.localStrategy);
-passport.serializeUser(Member.serializeUser);
-passport.deserializeUser(Member.deserializeUser);
+passport.deserializeUser(function (user, done) {
+    done(null, user);
+});
 
 var app = express();
-// all environments
 app.set('port', process.env.PORT || 3000);
 app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
@@ -40,15 +63,11 @@ app.use(express.methodOverride());
 app.use(express.static(path.join(application_root, "public")));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.cookieParser());
-app.use(express.cookieSession(
-    {
-        secret: process.env.COOKIE_SECRET || "Superdupersecret",
-        cookie: {maxAge: new Date(Date.now() + 30000)}
-    }));
-app.use(express.session({ secret: 'keyboard cat' }));
+app.use(express.session({ secret: 'applecake'}));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(app.router);
+
 
 
 mongoose.connect('mongodb://localhost:27017');
@@ -64,10 +83,37 @@ if ('development' == app.get('env')) {
 
 
 
+
+var userRoles =  require('./public/javascripts/routingConfig').userRoles;
+var preprocessorCORS = function (req, res, next) {
+
+    if(req.user == null){
+        console.log("Logged Out");
+        res.statusCode = 203;
+
+    }else{
+        console.log("Logged In");
+        console.log(req.user);
+        res.statusCode = 200;
+    }
+    next();
+};
+var prefixes = ['members', 'events', 'surveys', 'emails'];
 app.get('/',routes.index);
 app.get('/pdf',routes.pdf);
 app.get('/fragments/:type/:name', routes.fragments);
+prefixes.forEach(function(prefix) {
+    app.all("/"+prefix, preprocessorCORS);
+    map.mapRoute(app, prefix);
+});
 
+
+app.get('/ping', function(req, res){
+    //console.log("===/ping req.user===");
+    console.log(req.user);
+    //console.log(req.session.passport);
+    res.send({ user: req.user||{}});
+});
 app.get('/excel', function(req, res){
     var opts ="" ;
     var workbook = excelbuilder.createWorkbook( __dirname+'/public/userfiles/','sample.xlsx');
@@ -94,12 +140,6 @@ app.post('/participant',function(req, res){
     res.send({title:'QRCODE', qrcodeURL:qrimgtag});
 });
 
-var prefixes = ['members', 'events', 'surveys', 'emails'];
-
-prefixes.forEach(function(prefix) {
-    map.mapRoute(app, prefix);
-});
-
 var binPath = phantomjs.path;
 var childArgs = [
     path.join(__dirname, '/public/rasterize.js http://localhost:3000/pdf ./test.pdf A4')
@@ -116,20 +156,12 @@ app.get('/convertPdf',function(req, res){   //convertPdf 요청이 오면 phanto
 var auth = require('./controllers/authController');
 app.post('/auth/login', auth.login);
 app.post('/auth/logout', auth.logout);
-app.get('/auth/login/success', function(req, res){
-    console.log("login SUccess");
-    console.log(req.session.passport.user);
-    res.send({user:req.session.passport.user , result:"SUCCESS"});
-});
-app.get('/auth/login/failure', function(req, res){
-    console.log("login Fail");
-    //console.log(res);
-    res.send({result:"FAIL"});
-});
-
+app.get('/auth/login/success', auth.loginSuccess);
+app.get('/auth/login/failure',auth.loginFailure);
 
 
 app.get('*', routes.index);
+
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });

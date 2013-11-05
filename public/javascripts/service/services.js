@@ -5,35 +5,23 @@
  * Time: 오후 2:49
  * To change this template use File | Settings | File Templates.
  */
-'use strict';
 
-cm.factory('Auth', function($http, $cookieStore){
 
-    var accessLevels = routingConfig.accessLevels
-        , userRoles = routingConfig.userRoles
-        , currentUser = $cookieStore.get('user') || { role: userRoles.public };
-    console.log(currentUser);
-    $cookieStore.remove('user');
+cm.factory('Auth', function($http, $rootScope, $cookies){
+    $rootScope.User = angular.fromJson(unescape($cookies.user)) || {};
+    delete $cookies['user'];
     function changeUser(user) {
-        //console.log("+=changeUser++");
-        //console.log(user);
-        _.extend(currentUser, user);
-        //$cookieStore.remove('user');
-        //$cookieStore.put('user',user);
+        $rootScope.User = user;
     };
-
     return {
-        authorize: function(accessLevel, role) {
-            if(role === undefined)
-                role = currentUser.role;
-
-            return accessLevel.bitMask & role.bitMask;
+        ping: function(){
+            $http({method: 'GET',headers:  { 'If-Modified-Since': "0" },
+                url: "/ping"}).success(function(data){
+                    changeUser(data.user);
+            });
         },
-        isLoggedIn: function(user) {
-            if(user === undefined)
-                user = currentUser;
-            console.log(user.role.title);
-            return user.role.title == userRoles.user.title || user.role.title == userRoles.admin.title;
+        isLoggedIn: function() {
+            return $rootScope.User.Name == null ? false : true;
         },
         register: function(user, success, error) {
             $http.post('/members', user).success(function(res) {
@@ -48,30 +36,13 @@ cm.factory('Auth', function($http, $cookieStore){
             }).error(error);
         },
         logout: function(success, error) {
-            $http.post('/auth/login').success(function(){
-                changeUser({
-                    role: userRoles.public
-                });
+            $http.post('/auth/logout').success(function(){
+                console.log('logout');
+                changeUser({});
                 success();
             }).error(error);
-        },
-        accessLevels: accessLevels,
-        userRoles: userRoles,
-        user: currentUser
+        }
     };
-});
-
-cm.factory('Users', function($http) {
-        return {
-            getAll: function(success, error) {
-                $http.get('/users').success(success).error(error);
-            }
-        };
-    });
-cm.factory("memberLogin", function($resource) {
-    return $resource("/auth/login", {}, {
-        login:      {method: 'POST'}
-    });
 });
 cm.factory("memberREST", function($resource) {
     return $resource("/members/:id", {}, {

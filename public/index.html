@@ -81,6 +81,9 @@
 
     <script src="/javascripts/controller/cm_memberJoin.js"></script>
     <script src="/javascripts/controller/cm_memberList.js"></script>
+    <script src="/javascripts/controller/cm_eventList.js"></script>
+    <script src="/javascripts/controller/cm_surveyList.js"></script>
+    <script src="/javascripts/controller/cm_emailList.js"></script>
 
     <!--Angular Directives And Controllers-->
 
@@ -143,11 +146,11 @@
                                 <li><a href="/emailList">Email</a></li>
                             </ul>
                             <div class="navbar-form navbar-right">
-                                <button class="btn btn-default" ng-click="showLoginModal()" ng-if="user.role.title=='public'">
+                                <button class="btn btn-default" ng-click="showLoginModal()" ng-if="!User.Id">
                                     Login
                                 </button>
-                                <button class="btn btn-default" ng-click="logout()" ng-if="user.role.title!='public'">
-                                    Logout
+                                <button class="btn btn-default" ng-click="logout()" ng-if="User.Id.length > 0">
+                                    {{User.Name}} Logout
                                 </button>
                             </div>
                         </nav>

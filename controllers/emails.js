@@ -9,6 +9,13 @@
 var Email = require('../models/email.js');
 
 exports.index = function(req, res){
+    Email.find().sort({_id:-1}).execFind(function(err, docs) {
+        if(err){
+            res.send({result:"FAIL", ERR:err});
+        }else{
+            res.send({emails:docs, result:"SUCCESS"});
+        }
+    });
 };
 exports.show = function(req, res){
 };

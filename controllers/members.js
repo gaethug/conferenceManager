@@ -7,8 +7,8 @@
  */
 
 var Member = require('../models/member.js');
-var userRoles =  require('../public/javascripts/routingConfig').userRoles;
 exports.index = function(req, res){
+    console.log(req.user);
     Member.find().sort({_id:-1}).execFind(function(err, docs) {
         if(err){
             res.send({result:"FAIL", ERR:err});
@@ -18,6 +18,7 @@ exports.index = function(req, res){
     });
 };
 exports.show = function(req, res){
+
     var id = req.params.id;
     Member.findOne({_id:id}, function (err, data){
         if(err){
@@ -28,12 +29,12 @@ exports.show = function(req, res){
     });
 };
 exports.create = function(req, res){
-    console.log(userRoles.user);
+    //console.log(userRoles.user);
     var member = {
         Name:req.body.Name,
         Id:req.body.Id,
         Password:req.body.Password,
-        role: userRoles.user
+        role:req.body.role
     };
     var memberObj = new Member(member);
     memberObj.save(function(err, data){

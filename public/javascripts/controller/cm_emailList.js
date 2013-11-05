@@ -5,9 +5,8 @@
  * Time: 오후 1:09
  * To change this template use File | Settings | File Templates.
  */
-cm.controller('memberListCtrl',function($rootScope,$location, $http,$scope, memberREST, Auth){
-    memberREST.query({},function(data){
+cm.controller('emailListCtrl',function($rootScope,$location, $http,$scope, emailREST, Auth){
+    emailREST.query({},function(data){
         console.log(data);
-        $scope.members = data.members;
     });
 });

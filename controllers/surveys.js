@@ -9,7 +9,13 @@
 var Survey = require('../models/survey.js');
 
 exports.index = function(req, res){
-
+    Survey.find().sort({_id:-1}).execFind(function(err, docs) {
+        if(err){
+            res.send({result:"FAIL", ERR:err});
+        }else{
+            res.send({surveys:docs, result:"SUCCESS"});
+        }
+    });
 };
 exports.show = function(req, res){
 };

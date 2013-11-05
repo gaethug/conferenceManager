@@ -12,7 +12,6 @@ var ObjectId = Schema.ObjectId;
 var Event = new Schema({
     Title:String,
     Memo:String,
-    Role:String,
     _Member:{type: Schema.ObjectId, ref:"Member"},
     Surveys:[{type: Schema.ObjectId, ref:"Survey"}],
     Email:[{type: Schema.ObjectId, ref:"Email"}]

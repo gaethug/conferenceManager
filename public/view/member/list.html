@@ -28,13 +28,9 @@
     </div>
 </div>
 <div class="col-lg-2" >
-
-    <div class="needLogin" ng-if="user.role.title == 'public'">
-
-    </div>
-    <div class="loggedin" ng-if="user.role.title != 'public'">
-        <div>{{user.Id}}</div>
-        <div>{{user.Name}}</div>
+    <div class="loggedin" ng-if="User.Id.length > 0">
+        <div>{{User.Id}}</div>
+        <div>{{User.Name}}</div>
         <button type="button" class="btn btn-block btn-primary" ng-click="logout()">로그아웃</button>
     </div>
 </div>
