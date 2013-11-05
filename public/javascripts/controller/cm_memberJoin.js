@@ -5,7 +5,7 @@
  * Time: 오후 1:09
  * To change this template use File | Settings | File Templates.
  */
-cm.controller('memberJoinCtrl',function($rootScope,$location, $http,$scope, Auth){
+cm.controller('memberJoinCtrl',function($rootScope,$location, $http,$scope, Auth, $route){
     $scope.role = Auth.userRoles.user;
     $scope.userRoles = Auth.userRoles;
 
@@ -17,7 +17,8 @@ cm.controller('memberJoinCtrl',function($rootScope,$location, $http,$scope, Auth
             role:$scope.member.role
         }, function(data){
             console.log(data);
-            $location.path('/');
+            //$location.path('/');
+            location.href="/";
         },function(err){
             console.log(err);
         });
