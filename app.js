@@ -82,9 +82,6 @@ if ('development' == app.get('env')) {
 }
 
 
-
-
-var userRoles =  require('./public/javascripts/routingConfig').userRoles;
 var preprocessorCORS = function (req, res, next) {
 
     if(req.user == null){

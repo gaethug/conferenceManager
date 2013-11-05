@@ -31,6 +31,7 @@ var cm = angular.module('CM',['ngAnimate','ngCookies','ngResource','ngRoute','ng
         $locationProvider.html5Mode(true);
         $locationProvider.hashPrefix('!');
 
+        //응답을 캐치하여 203일 경우 loginRequried 호출
         var interceptor = ['$rootScope','$q', function(scope, $q) {
             function success(response) {
                 var status = response.status;
@@ -56,8 +57,8 @@ var cm = angular.module('CM',['ngAnimate','ngCookies','ngResource','ngRoute','ng
         });
         $rootScope.$on('loginRequired', function() {
             if(Auth.isLoggedIn()){
-                Auth.ping();    //클라이언트에서 로그인 상태인데 203이 떨어진다면 - 서버 세션 만료, 클라이언트는 모르는 상태
-                                //핑을 날린다.
+                Auth.ping();    //클라이언트는 지가 로그인 상태 인줄 알지만 203이 날라온 경우, 서버 세션 만료, 클라이언트는 모르는 상태
+                                //핑을 날려 최신 유져상태 유지
             }else{
                 $rootScope.User = {};
             }

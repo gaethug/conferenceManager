@@ -2,7 +2,6 @@
 /*
  * GET home page.
  */
-var userRoles =  require('../public/javascripts/routingConfig').userRoles;
 exports.index = function(req, res){
     console.log("index");
     if(req.user){
