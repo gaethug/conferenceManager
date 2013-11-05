@@ -5,9 +5,8 @@
  * Time: 오후 1:09
  * To change this template use File | Settings | File Templates.
  */
-cm.controller('eventListCtrl',function($rootScope,$location, $http,$scope, eventREST, Auth){
-    eventREST.query({},function(data){
+cm.controller('emailMainCtrl',function($rootScope,$location, $http,$scope, emailREST, Auth){
+    emailREST.query({},function(data){
         console.log(data);
-        $scope.somethings = data.events;
     });
 });

@@ -13,7 +13,8 @@ cm.controller('memberJoinCtrl',function($rootScope,$location, $http,$scope, Auth
         Auth.register({
             Name:$scope.member.Name,
             Id:$scope.member.Id,
-            Password:$scope.member.Password
+            Password:$scope.member.Password,
+            role:$scope.member.role
         }, function(data){
             console.log(data);
         },function(err){

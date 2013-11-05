@@ -14,6 +14,6 @@ var Event = new Schema({
     Memo:String,
     _Member:{type: Schema.ObjectId, ref:"Member"},
     Surveys:[{type: Schema.ObjectId, ref:"Survey"}],
-    Email:[{type: Schema.ObjectId, ref:"Email"}]
+    Emails:[{type: Schema.ObjectId, ref:"Email"}]
 });
 module.exports = mongoose.model('Event',Event);

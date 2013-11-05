@@ -5,9 +5,8 @@
  * Time: 오후 1:09
  * To change this template use File | Settings | File Templates.
  */
-cm.controller('eventListCtrl',function($rootScope,$location, $http,$scope, eventREST, Auth){
-    eventREST.query({},function(data){
+cm.controller('surveyCreateCtrl',function($rootScope,$location, $http,$scope, surveyREST, Auth){
+    surveyREST.query({},function(data){
         console.log(data);
-        $scope.somethings = data.events;
     });
 });

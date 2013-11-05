@@ -8,12 +8,19 @@
 
 
 cm.factory('Auth', function($http, $rootScope, $cookies){
-    $rootScope.User = angular.fromJson(unescape($cookies.user)) || {};
+    var accessLevels = routingConfig.accessLevels
+        , userRoles = routingConfig.userRoles;
+    $rootScope.User = angular.fromJson(unescape($cookies.user)) || {role: userRoles.public};
     delete $cookies['user'];
     function changeUser(user) {
         $rootScope.User = user;
     };
     return {
+        authorize: function(accessLevel, role) {
+            if(role === undefined)
+                role = $rootScope.User.role;
+            return accessLevel.bitMask & role.bitMask;
+        },
         ping: function(){
             $http({method: 'GET',headers:  { 'If-Modified-Since': "0" },
                 url: "/ping"}).success(function(data){
@@ -38,10 +45,12 @@ cm.factory('Auth', function($http, $rootScope, $cookies){
         logout: function(success, error) {
             $http.post('/auth/logout').success(function(){
                 console.log('logout');
-                changeUser({});
+                changeUser({role: userRoles.public});
                 success();
             }).error(error);
-        }
+        },
+        accessLevels: accessLevels,
+        userRoles: userRoles
     };
 });
 cm.factory("memberREST", function($resource) {

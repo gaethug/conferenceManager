@@ -9,7 +9,7 @@
 var Event = require('../models/event.js');
 
 exports.index = function(req, res){
-    Event.find().sort({_id:-1}).execFind(function(err, docs) {
+    Event.find().sort({_id:-1}).populate("_Member").execFind(function(err, docs) {
         if(err){
             res.send({result:"FAIL", ERR:err});
         }else{
@@ -19,13 +19,20 @@ exports.index = function(req, res){
 };
 exports.show = function(req, res){
     var id = req.params.id;
-    Event.findOne({_id:id}, function (err, data){
+    Event.findOne({_id:id}).populate("_Member").exec(function (err, data){
+        if(err){
+            res.send({result:"FAIL", ERR:err});
+        }else{
+            res.send({event:data , result:"SUCCESS"});
+        }
+    });
+    /*Event.findOne({_id:id}, function (err, data){
         if(err){
             res.send({result:"FAIL", ERR:err});
         }else{
             res.send({events:data , result:"SUCCESS"});
         }
-    });
+    });*/
 };
 exports.create = function(req, res){
     if(req.user == null){
@@ -33,11 +40,6 @@ exports.create = function(req, res){
         return false;
     }else{
         var memberId = req.user._id;
-        console.log(req.user);
-        if(memberId == null){
-            res.send({result:"FAIL", ERR:"req.user._id is Null"});
-            return false;
-        }
     }
     var event = {
         Title:req.body.Title,
