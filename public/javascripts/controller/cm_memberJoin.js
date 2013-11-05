@@ -17,6 +17,7 @@ cm.controller('memberJoinCtrl',function($rootScope,$location, $http,$scope, Auth
             role:$scope.member.role
         }, function(data){
             console.log(data);
+            $location.path('/');
         },function(err){
             console.log(err);
         });

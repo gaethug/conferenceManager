@@ -44,6 +44,7 @@ exports.create = function(req, res){
         }else{
             console.log("Create Member Success");
             res.send({member:data , result:"SUCCESS"});
+
         }
     });
 };
