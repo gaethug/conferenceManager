@@ -33,8 +33,7 @@ exports.create = function(req, res){
     var member = {
         Name:req.body.Name,
         Id:req.body.Id,
-        Password:req.body.Password,
-        role:req.body.role
+        Password:req.body.Password
     };
     var memberObj = new Member(member);
     memberObj.save(function(err, data){
