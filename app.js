@@ -82,7 +82,7 @@ if ('development' == app.get('env')) {
 }
 
 
-var preprocessorCORS = function (req, res, next) {
+var preprocessor = function (req, res, next) {
 
     if(req.user == null){
         console.log("Logged Out");
@@ -100,7 +100,7 @@ app.get('/',routes.index);
 app.get('/pdf',routes.pdf);
 app.get('/fragments/:type/:name', routes.fragments);
 prefixes.forEach(function(prefix) {
-    app.all("/"+prefix, preprocessorCORS);
+    app.all("/"+prefix, preprocessor);
     map.mapRoute(app, prefix);
 });
 
