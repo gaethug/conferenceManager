@@ -77,6 +77,7 @@
 
     <script src="/javascripts/controller/cm.js"></script>
     <script src="/javascripts/service/services.js"></script>
+    <script src="/javascripts/directive/cm_directive.js"></script>
 
 
     <script src="/javascripts/controller/cm_memberJoin.js"></script>
@@ -146,10 +147,10 @@
                         </div>
                         <nav class="collapse navbar-collapse navbar-ex2-collapse">
                             <ul class="nav navbar-nav">
-                                <li><a href="/memberList">Member</a></li>
-                                <li><a href="/eventList">Event</a></li>
-                                <li><a href="/surveyList">Survey</a></li>
-                                <li><a href="/emailList">Email</a></li>
+                                <li active-nav><a href="/memberList">Member</a></li>
+                                <li active-nav><a href="/eventList">Event</a></li>
+                                <li active-nav><a href="/surveyList">Survey</a></li>
+                                <li active-nav><a href="/emailList">Email</a></li>
                             </ul>
                             <div class="navbar-form navbar-right">
                                 <button class="btn btn-default" ng-click="showLoginModal()" ng-if="!User.Id">
