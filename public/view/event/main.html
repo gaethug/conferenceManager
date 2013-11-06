@@ -2,13 +2,13 @@
 </div>
 <div class="col-lg-8" >
     <div class="page-header">
-        <h1 class="text-success">이벤트<small>메인</small></h1>
+        <h1 class="text-success">이벤트<small>메인</small><span class="text-primary" ng-if="something._Member._id == User._id">(*나의 이벤트 입니다.)</span></h1>
     </div>
     <div class="jumbotron">
         <h1>{{something.Title}}</h1>
         <p>{{something.Memo}}</p>
         <p>만든사람 <a href="/memberMain/{{something._Member._id}}">{{something._Member.Name}}</a></p>
-        <p><a class="btn btn-warning" ng-href="/surveyCreate/{{eventId}}">서베이 만들미</a>
+        <p ng-if="something._Member._id == User._id"><a class="btn btn-warning" ng-href="/surveyCreate/{{eventId}}">서베이 만들미</a>
             <a class="btn btn-danger" ng-href="/emailCreate/{{eventId}}">이메일 만들미</a></p>
     </div>
     <h5>서베이 {{something.Surveys.length}}개</h5>
