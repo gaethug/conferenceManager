@@ -8,5 +8,7 @@
 cm.controller('surveyListCtrl',function($rootScope,$location, $http,$scope, surveyREST, Auth){
     surveyREST.query({},function(data){
         console.log(data);
+        $scope.somethings = data.surveys;
+
     });
 });

@@ -23,7 +23,8 @@ var cm = angular.module('CM',['ngAnimate','ngCookies','ngResource','ngRoute','ng
             when('/participantList', {controller:'participantListCtrl', templateUrl:'/fragments/participant/list'}).
             when('/participantList', {controller:'participantListCtrl', templateUrl:'/fragments/participant/list'}).*/
             when('/memberJoin', {controller:'memberJoinCtrl', templateUrl:'/fragments/member/create', access : access.anon}).
-            when('/memberList', {controller:'memberListCtrl', templateUrl:'/fragments/member/list', access : access.admin}).
+            when('/memberList', {controller:'memberListCtrl', templateUrl:'/fragments/member/list', access : access.public}).
+            when('/memberMain/:memberId', {controller:'memberMainCtrl', templateUrl:'/fragments/member/main', access : access.user}).
 
             when('/eventList', {controller:'eventListCtrl',templateUrl:'/fragments/event/list', access : access.public}).
             when('/eventMain/:eventId', {controller:'eventMainCtrl',templateUrl:'/fragments/event/main', access : access.public}).
@@ -32,11 +33,12 @@ var cm = angular.module('CM',['ngAnimate','ngCookies','ngResource','ngRoute','ng
             when('/emailList', {controller:'emailListCtrl',templateUrl:'/fragments/email/list', access : access.public}).
             when('/emailMain/:emailId', {controller:'emailMainCtrl',templateUrl:'/fragments/email/main', access : access.public}).
             when('/emailCreate', {controller:'emailCreateCtrl',templateUrl:'/fragments/email/create', access : access.user}).
+            when('/emailCreate/:eventId', {controller:'emailCreateCtrl',templateUrl:'/fragments/email/create', access : access.user}).
 
             when('/surveyList', { controller:'surveyListCtrl',templateUrl:'/fragments/survey/list', access : access.public}).
             when('/surveyMain/:surveyId', { controller:'surveyMainCtrl',templateUrl:'/fragments/survey/main', access : access.public}).
-            when('/surveyCreate', { controller:'surveyCreateCtrl',templateUrl:'/fragments/survey/create', access : access.user}).
-
+            when('/surveyCreate', {controller:'surveyCreateCtrl',templateUrl:'/fragments/survey/create',access : access.user}).
+            when('/surveyCreate/:eventId', {controller:'surveyCreateCtrl',templateUrl:'/fragments/survey/create',access : access.user}).
             otherwise({redirectTo:'/', access : access.public});
         $locationProvider.html5Mode(true);
         $locationProvider.hashPrefix('!');

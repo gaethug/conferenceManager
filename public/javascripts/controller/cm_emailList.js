@@ -8,5 +8,6 @@
 cm.controller('emailListCtrl',function($rootScope,$location, $http,$scope, emailREST, Auth){
     emailREST.query({},function(data){
         console.log(data);
+        $scope.somethings = data.emails;
     });
 });

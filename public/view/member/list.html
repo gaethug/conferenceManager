@@ -1,8 +1,9 @@
-<div class="col-lg-10" >
-    <h1>멤버</h1>
-    <h4>목록보미</h4>
+<div class="col-lg-12" >
+    <div class="page-header">
+        <h1 class="text-info">멤버<small>목록</small></h1>
+    </div>
     <div class="table-responsive">
-        <table class="table">
+        <table class="table  table-condensed table-bordered">
             <thead>
             <tr>
                 <td>#</td>
@@ -16,20 +17,13 @@
             <tbody>
             <tr ng-repeat = "member in members">
                 <td>{{$index+1}}</td>
-                <td>{{member.Name}}</td>
-                <td>{{member.Id}}</td>
-                <td>{{member.Events.length}}</td>
-                <td>{{member.Surveys.length}}</td>
-                <td>{{member.Emails.length}}</td>
+                <td><a href="/memberMain/{{member._id}}">{{member.Name}}</a></td>
+                <td><a href="/memberMain/{{member._id}}">{{member.Id}}</a></td>
+                <td>{{member.Events.length}}개</td>
+                <td>{{member.Surveys.length}}개</td>
+                <td>{{member.Emails.length}}개</td>
             </tr>
             </tbody>
         </table>
-    </div>
-</div>
-<div class="col-lg-2" >
-    <div class="loggedin" ng-if="User.Id.length > 0">
-        <div>{{User.Id}}</div>
-        <div>{{User.Name}}</div>
-        <button type="button" class="btn btn-block btn-primary" ng-click="logout()">로그아웃</button>
     </div>
 </div>

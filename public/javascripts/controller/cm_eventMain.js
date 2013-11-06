@@ -7,6 +7,7 @@
  */
 cm.controller('eventMainCtrl',function($rootScope,$routeParams, $location, $http,$scope, eventREST){
     $scope.something = {};
+    $scope.eventId = $routeParams.eventId;
     eventREST.get({id:$routeParams.eventId}, function(data){
         $scope.something = data.event;
     });

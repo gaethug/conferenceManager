@@ -1,8 +1,10 @@
 <div class="col-lg-2" >
 </div>
 <div class="col-lg-8" >
-    <h1>서베이</h1>
-    <h4>만들미</h4>
+    <div class="page-header">
+        <h1 class="text-warning">서베이<small>생성</small></h1>
+    </div>
+    <p>{{myParent}}</p>
     <div class="form-horizontal" role="form">
         <div class="form-group">
             <label class="col-lg-2 control-label" >제목</label>
@@ -13,7 +15,7 @@
             <div class="col-lg-10"><input type="text" ng-model = "something.Memo" class="form-control" placeholder="내용"></div>
         </div>
     </div>
-    <button type="button" class="btn btn-default btn-block" ng-click="createSomething()">만들미</button>
+    <button type="button" class="btn btn-block btn-warning" ng-click="createSomething()">만들미</button>
 </div>
 <div class="col-lg-2" >
 </div>

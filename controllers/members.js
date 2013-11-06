@@ -18,15 +18,21 @@ exports.index = function(req, res){
     });
 };
 exports.show = function(req, res){
-
     var id = req.params.id;
-    Member.findOne({_id:id}, function (err, data){
+    Member.findOne({_id:id}).populate("Surveys Events Emails").exec(function (err, data){
         if(err){
             res.send({result:"FAIL", ERR:err});
         }else{
             res.send({member:data , result:"SUCCESS"});
         }
     });
+    /*Member.findOne({_id:id}, function (err, data){
+        if(err){
+            res.send({result:"FAIL", ERR:err});
+        }else{
+            res.send({member:data , result:"SUCCESS"});
+        }
+    });*/
 };
 exports.create = function(req, res){
     //console.log(userRoles.user);

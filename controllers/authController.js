@@ -17,7 +17,7 @@ module.exports = {
     loginSuccess: function(req, res){
         console.log("login SUccess");
         console.log(req.session.passport);
-        req.session.cookie.expires = new Date(Date.now() + 60000);
+        //req.session.cookie.expires = new Date(Date.now() + 60000);
         res.send({user:req.session.passport.user , result:"SUCCESS"});
     },
 

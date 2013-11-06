@@ -6,11 +6,15 @@
  * To change this template use File | Settings | File Templates.
  */
 
-
+cm.factory("paramIdService", function ($q, $timeout) {
+    return function(id){
+        return id;
+    };
+});
 cm.factory('Auth', function($http, $rootScope, $cookies){
     var accessLevels = routingConfig.accessLevels
         , userRoles = routingConfig.userRoles;
-    $rootScope.User = angular.fromJson(unescape($cookies.user)) || {role: userRoles.public};
+    $rootScope.User =  $cookies.user == null ? {role: userRoles.public} : angular.fromJson(unescape($cookies.user)) ;
     delete $cookies['user'];
     function changeUser(user) {
         $rootScope.User = user;

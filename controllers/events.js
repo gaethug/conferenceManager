@@ -7,6 +7,7 @@
  */
 
 var Event = require('../models/event.js');
+var Member = require('../models/member.js');
 
 exports.index = function(req, res){
     Event.find().sort({_id:-1}).populate("_Member").execFind(function(err, docs) {
@@ -19,7 +20,7 @@ exports.index = function(req, res){
 };
 exports.show = function(req, res){
     var id = req.params.id;
-    Event.findOne({_id:id}).populate("_Member").exec(function (err, data){
+    Event.findOne({_id:id}).populate("_Member Surveys Emails").exec(function (err, data){
         if(err){
             res.send({result:"FAIL", ERR:err});
         }else{
@@ -52,8 +53,14 @@ exports.create = function(req, res){
             console.log("Create Event Fail");
             res.send({result:"FAIL", ERR:err});
         }else{
-            console.log("Create Event Success");
-            res.send({event:data , result:"SUCCESS"});
+            Member.update({_id: memberId}, {'$push':{Events:data._id}}, function (err,data) {
+                console.log(data);
+                if (err) {
+                    res.send({result:"FAIL", ERR:err});
+                } else {
+                    res.send({result: "SUCCESS"});
+                }
+            });
         }
     });
 };

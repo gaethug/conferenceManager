@@ -2,15 +2,20 @@
 </div>
 <div class="col-lg-8" >
     <div class="page-header">
-        <h1 class="text-success">이벤트<small>메인</small></h1>
+        <h1 class="text-info">멤버<small>메인</small></h1>
     </div>
     <div class="jumbotron">
-        <h1>{{something.Title}}</h1>
-        <p>{{something.Memo}}</p>
-        <p>만든사람 <a href="/memberMain/{{something._Member._id}}">{{something._Member.Name}}</a></p>
-        <p><a class="btn btn-warning" ng-href="/surveyCreate/{{eventId}}">서베이 만들미</a>
-            <a class="btn btn-danger" ng-href="/emailCreate/{{eventId}}">이메일 만들미</a></p>
+        <h1>{{something.Name}}</h1>
+        <p>{{something.Id}}</p>
     </div>
+
+    <h5>이벤트 {{something.Events.length}}개</h5>
+    <ul class="list-group">
+        <li class="list-group-item" ng-if="something.Events.length == 0">없음</li>
+        <li class="list-group-item" ng-repeat="event in something.Events">
+            <a href="/eventMain/{{event._id}}">{{event.Title}}</a>
+        </li>
+    </ul>
     <h5>서베이 {{something.Surveys.length}}개</h5>
     <ul class="list-group">
         <li class="list-group-item" ng-if="something.Surveys.length == 0">없음</li>
@@ -27,5 +32,4 @@
     </ul>
 </div>
 <div class="col-lg-2" >
-
 </div>

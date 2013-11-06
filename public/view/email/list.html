@@ -1,28 +1,28 @@
-<div class="col-lg-10" >
-    <h1>이메일</h1>
-    <h4>목록보미</h4>
+<div class="col-lg-12" >
+    <div class="page-header">
+        <h1 class="text-danger">이메일<small>목록</small> <a class="btn pull-right btn-danger" ng-href="/emailCreate">이메일 만들미</a></h1>
+
+    </div>
     <div class="table-responsive">
-        <table class="table">
+        <table class="table table-condensed table-bordered">
             <thead>
             <tr>
                 <td>#</td>
-                <td>이름</td>
-                <td>아이디</td>
-                <td>생성 이벤트</td>
-                <td>생성 설문</td>
-                <td>생성 이메일</td>
+                <td>제목</td>
+                <td>내용</td>
+                <td>만든이</td>
+                <td>부모 이벤트</td>
             </tr>
             </thead>
             <tbody>
             <tr ng-repeat = "something in somethings">
                 <td>{{$index+1}}</td>
-                <td>{{something.Title}}</td>
-                <td>{{something.Memo}}</td>
+                <td><a href="/emailMain/{{something._id}}">{{something.Title}}</a></td>
+                <td class="col-lg-5"><a href="/emailMain/{{something._id}}">{{something.Memo}}</a></td>
+                <td><a href="/memberMain/{{something._Member._id}}">{{something._Member.Name}}</a></td>
+                <td><span ng-if="!something._Event">없음</span><a href="/eventMain/{{something._Event._id}}">{{something._Event.Title}}</a></td>
             </tr>
             </tbody>
         </table>
     </div>
-</div>
-<div class="col-lg-2" >
-    <a class="btn btn-block btn-primary" ng-href="/emailCreate">만들미</a>
 </div>

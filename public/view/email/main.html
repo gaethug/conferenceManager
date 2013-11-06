@@ -1,13 +1,17 @@
 <div class="col-lg-2" >
 </div>
 <div class="col-lg-8" >
-    <h1>이메일</h1>
-    <h4>{{something.Title}}</h4>
-    <p>{{something.Memo}}</p>
-    <hr>
-    <p>만든사람 {{something._Member.Name}}</p>
-    <p>만든이벤트 {{something._Event.Title}}</p>
+    <div class="page-header">
+        <h1 class="text-danger">이메일<small>메인</small></h1>
+    </div>
+    <div class="jumbotron">
 
+        <h1>{{something.Title}}</h1>
+
+        <p>{{something.Memo}}</p>
+        <p>만든사람 <a href="/memberMain/{{something._Member._id}}">{{something._Member.Name}}</a></p>
+        <p>부모 이벤트 <span class="text-danger" ng-if="!something._Event">없음</span><a ng-href="/eventMain/{{something._Event._id}}">{{something._Event.Title}}</a></p>
+    </div>
 </div>
 <div class="col-lg-2" >
 </div>
