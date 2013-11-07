@@ -10,4 +10,10 @@ cm.controller('memberMainCtrl',function($rootScope,$routeParams,$location, $http
     memberREST.get({id:$routeParams.memberId}, function(data){
         $scope.something = data.member;
     });
+    $scope.deleteSomething = function(){
+        memberREST.destroy({id:$routeParams.memberId},{},function(data){
+            console.log(data);
+
+        });
+    };
 });

@@ -72,4 +72,16 @@ exports.create = function(req, res){
 exports.update = function(req, res){
 };
 exports.destroy = function(req, res){
+    if(req.user == null){
+        res.send({result:"FAIL", ERR:"logged out"});
+        return false;
+    }
+    var id = req.params.id;
+    Email.remove({_id:id}, function(err){
+        if(err){
+            res.send({result:"FAIL", ERR:err});
+        }else{
+            res.send({result:"SUCCESS"});
+        }
+    });
 };

@@ -86,7 +86,6 @@ exports.update = function(req, res){
     });
 };
 exports.destroy = function(req, res){
-    var user = {};
     if(req.user == null){
         res.send({result:"FAIL", ERR:"logged out"});
         return false;

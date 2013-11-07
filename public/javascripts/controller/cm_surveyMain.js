@@ -10,4 +10,11 @@ cm.controller('surveyMainCtrl',function($rootScope,$routeParams,$location, $http
     surveyREST.get({id:$routeParams.surveyId}, function(data){
         $scope.something = data.survey;
     });
+
+    $scope.deleteSomething = function(){
+        surveyREST.destroy({id:$routeParams.surveyId},{},function(data){
+            console.log(data);
+
+        });
+    };
 });

@@ -10,4 +10,10 @@ cm.controller('emailMainCtrl',function($rootScope,$routeParams, $location, $http
     emailREST.get({id:$routeParams.emailId}, function(data){
         $scope.something = data.email;
     });
+    $scope.deleteSomething = function(){
+        emailREST.destroy({id:$routeParams.emailId},{},function(data){
+            console.log(data);
+
+        });
+    };
 });

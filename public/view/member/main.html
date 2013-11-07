@@ -2,7 +2,7 @@
 </div>
 <div class="col-lg-8" >
     <div class="page-header">
-        <h1 class="text-info">멤버<small>메인</small><span class="text-primary" ng-if="something._id == User._id">(*나의 메인 페이지 입니다.)</span></h1>
+        <h1 class="text-info">멤버<small>메인</small></h1>
     </div>
     <div class="jumbotron">
         <h1>{{something.Name}}</h1>
@@ -32,4 +32,8 @@
     </ul>
 </div>
 <div class="col-lg-2" >
+    <div class="text-primary" ng-if="something._id == User._id">
+        (*나의 메인 입니다.)
+        <button class="btn btn-primary" type="button" ng-click="deleteSomething()">탈퇴</button>
+    </div>
 </div>

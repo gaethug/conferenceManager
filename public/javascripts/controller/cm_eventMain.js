@@ -11,4 +11,10 @@ cm.controller('eventMainCtrl',function($rootScope,$routeParams, $location, $http
     eventREST.get({id:$routeParams.eventId}, function(data){
         $scope.something = data.event;
     });
+    $scope.deleteSomething = function(){
+        eventREST.destroy({id:$routeParams.eventId},{},function(data){
+            console.log(data);
+
+        });
+    };
 });
