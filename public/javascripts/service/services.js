@@ -66,11 +66,11 @@ cm.factory("memberREST", function($resource) {
         create:     {method: 'POST'}
     });
 });
+
 cm.factory("eventREST", function($resource) {
-    return $resource("/events/:id/member/:memberId", {id: "@id", memberId: "@memberId"}, {
+    return $resource("/events/:id", {}, {
         query:      {method: 'GET', cache:false},
         get:        {method: 'GET', cache:false},
-        getByMember:        {method: 'GET', cache:false},
         destroy:    {method: 'DELETE'},
         update:     {method: 'PUT'},
         create:     {method: 'POST'}
@@ -80,7 +80,6 @@ cm.factory("surveyREST", function($resource) {
     return $resource("/surveys/:id", {}, {
         query:      {method: 'GET', cache:false},
         get:        {method: 'GET', cache:false},
-        getByMember:        {method: 'GET', cache:false},
         destroy:    {method: 'DELETE'},
         update:     {method: 'PUT'},
         create:     {method: 'POST'}
@@ -90,7 +89,6 @@ cm.factory("emailREST", function($resource) {
     return $resource("/emails/:id", {}, {
         query:      {method: 'GET', cache:false},
         get:        {method: 'GET', cache:false},
-        getByMember:        {method: 'GET', cache:false},
         destroy:    {method: 'DELETE'},
         update:     {method: 'PUT'},
         create:     {method: 'POST'}
