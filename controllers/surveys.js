@@ -11,7 +11,7 @@ var Event = require('../models/event.js');
 var Member = require('../models/member.js');
 
 exports.index = function(req, res){
-    Survey.find().sort({_id:-1}).populate("_Member _Event").execFind(function(err, docs) {
+    Survey.find().sort({_id:-1}).populate("_Event").execFind(function(err, docs) {
         if(err){
             res.send({result:"FAIL", ERR:err});
         }else{
@@ -21,7 +21,7 @@ exports.index = function(req, res){
 };
 exports.show = function(req, res){
     var id = req.params.id;
-    Survey.findOne({_id:id}).populate("_Member _Event").exec(function (err, data){
+    Survey.findOne({_id:id}).populate("_Event").exec(function (err, data){
         if(err){
             res.send({result:"FAIL", ERR:err});
         }else{
@@ -29,6 +29,7 @@ exports.show = function(req, res){
         }
     });
 };
+
 exports.create = function(req, res){
     if(req.user == null){
         res.send({result:"FAIL", ERR:"logged out"});
@@ -39,7 +40,7 @@ exports.create = function(req, res){
     var survey = {
         Title:req.body.Title,
         Memo:req.body.Memo,
-        _Member:memberId,
+        Creator:req.user,
         _Event:req.body._Event
     };
     var surveyObj = new Survey(survey);
@@ -48,14 +49,6 @@ exports.create = function(req, res){
             console.log("Create Survey Fail");
             res.send({result:"FAIL", ERR:err});
         }else{
-            Member.update({_id: memberId}, {'$push':{Surveys:data._id}}, function (err,data) {
-                console.log(data);
-                if (err) {
-                    res.send({result:"FAIL", ERR:err});
-                } else {
-                    res.send({result: "SUCCESS"});
-                }
-            });
             if(data._Event != null){
                 Event.update({_id: data._Event}, {'$push':{Surveys:data._id}}, function (err,data) {
                     console.log(data);
@@ -65,6 +58,8 @@ exports.create = function(req, res){
                         res.send({result: "SUCCESS"});
                     }
                 });
+            }else{
+                res.send({result: "SUCCESS"});
             }
         }
     });
@@ -72,16 +67,36 @@ exports.create = function(req, res){
 exports.update = function(req, res){
 };
 exports.destroy = function(req, res){
+    //멤버 도큐멘트, 이벤트 도큐멘트 수정 후 삭제
     if(req.user == null){
         res.send({result:"FAIL", ERR:"logged out"});
         return false;
     }
     var id = req.params.id;
-    Survey.remove({_id:id}, function(err){
+    Survey.findById(id, function (err, doc) {
         if(err){
             res.send({result:"FAIL", ERR:err});
         }else{
-            res.send({result:"SUCCESS"});
+            if(doc._Event){
+                //이벤트 Surveys에서 해당 survey Id 제거
+                console.log("have Event");
+                Event.update({_id:doc._Event},{"$pull":{Surveys:id}},function(err){
+                    if(err){
+                        console.log("remove Fail Survey On Event");
+                    }else{
+                        console.log("remove Survey On Event");
+                    }
+                });
+            }
+            doc.remove(function(err){
+                if(err){
+                    res.send({result:"FAIL", ERR:err});
+                }else{
+                    res.send({result:"SUCCESS"});
+                }
+            });
         }
+
     });
+
 };

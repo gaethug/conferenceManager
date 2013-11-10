@@ -10,8 +10,7 @@ cm.controller('eventCreateCtrl',function($rootScope,$location, $http,$scope, eve
     $scope.createSomething = function(){
         eventREST.create({},{
                 Title:$scope.something.Title,
-                Memo:$scope.something.Memo,
-                _Member:$rootScope.User._id
+                Memo:$scope.something.Memo
             }
             ,function(data){
                 console.log(data);

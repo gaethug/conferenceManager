@@ -8,6 +8,9 @@ exports.mapRoute = function (app, prefix) {
     // show
     app.get(prefix + '/:id', prefixObj.show);
 
+/*    // findByMemberId
+    app.get(prefix + '/member/:memberId', prefixObj.findByMember);*/
+
     // create
     app.post(prefix, prefixObj.create);
 
@@ -16,5 +19,14 @@ exports.mapRoute = function (app, prefix) {
 
     // destroy
     app.del(prefix + '/:id', prefixObj.destroy);
+
+    //etc
+    switch (prefix) {
+        case "/members":
+            app.get(prefix+"/:id/events/", prefixObj.showEvents);
+            app.get(prefix+"/:id/surveys/", prefixObj.showSurveys);
+            app.get(prefix+"/:id/emails/", prefixObj.showEmails);
+            break;
+    }
 
 };

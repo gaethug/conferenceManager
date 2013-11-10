@@ -6,22 +6,22 @@
     <div class="table-responsive">
         <table class="table table-condensed table-bordered">
             <thead>
-            <tr>
-                <td>#</td>
-                <td>제목</td>
-                <td>내용</td>
-                <td>만든이</td>
-                <td>부모 이벤트</td>
-            </tr>
+                <tr>
+                    <td>#</td>
+                    <td>부모 이벤트</td>
+                    <td>제목</td>
+                    <td>내용</td>
+                    <td>만든이</td>
+                </tr>
             </thead>
             <tbody>
-            <tr ng-repeat = "something in somethings">
-                <td>{{$index+1}}</td>
-                <td><a href="/emailMain/{{something._id}}">{{something.Title}}</a></td>
-                <td class="col-lg-5"><a href="/emailMain/{{something._id}}">{{something.Memo}}</a></td>
-                <td><a href="/memberMain/{{something._Member._id}}">{{something._Member.Name}}</a></td>
-                <td><span ng-if="!something._Event">없음</span><a href="/eventMain/{{something._Event._id}}">{{something._Event.Title}}</a></td>
-            </tr>
+                <tr ng-repeat = "something in somethings">
+                    <td>{{$index+1}}</td>
+                    <td><span ng-if="!something._Event">없음</span><a href="/eventMain/{{something._Event._id}}">{{something._Event.Title}}</a></td>
+                    <td><a href="/emailMain/{{something._id}}">{{something.Title}}</a></td>
+                    <td class="col-lg-5"><a href="/emailMain/{{something._id}}">{{something.Memo}}</a></td>
+                    <td><a href="/memberMain/{{something.Creator._id}}">{{something.Creator.Name}}</a></td>
+                </tr>
             </tbody>
         </table>
     </div>

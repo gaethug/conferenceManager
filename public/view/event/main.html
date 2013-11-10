@@ -7,8 +7,8 @@
     <div class="jumbotron">
         <h1>{{something.Title}}</h1>
         <p>{{something.Memo}}</p>
-        <p>만든사람 <a href="/memberMain/{{something._Member._id}}">{{something._Member.Name}}</a></p>
-        <p ng-if="something._Member._id == User._id"><a class="btn btn-warning" ng-href="/surveyCreate/{{eventId}}">서베이 만들미</a>
+        <p>만든사람 <a href="/memberMain/{{something.Creator._id}}">{{something.Creator.Name}}</a></p>
+        <p ng-if="something.Creator._id == User._id"><a class="btn btn-warning" ng-href="/surveyCreate/{{eventId}}">서베이 만들미</a>
             <a class="btn btn-danger" ng-href="/emailCreate/{{eventId}}">이메일 만들미</a></p>
     </div>
     <h5>서베이 {{something.Surveys.length}}개</h5>
@@ -27,7 +27,7 @@
     </ul>
 </div>
 <div class="col-lg-2" >
-    <div class="text-primary" ng-if="something._Member._id == User._id">
+    <div class="text-primary" ng-if="something.Creator._id == User._id">
         (*나의 이벤트 입니다.)
         <button class="btn btn-primary" type="button" ng-click="deleteSomething()">삭제</button>
     </div>

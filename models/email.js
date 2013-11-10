@@ -12,7 +12,8 @@ var ObjectId = Schema.ObjectId;
 var Email = new Schema({
     Title:String,
     Memo:String,
-    _Member:{type: Schema.ObjectId, ref:"Member"},
+    //_Member:{type: Schema.ObjectId, ref:"Member"},
+    Creator:{},
     _Event:{type: Schema.ObjectId, ref:"Event"}
 });
 module.exports = mongoose.model('Email',Email);

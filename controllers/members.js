@@ -7,6 +7,10 @@
  */
 
 var Member = require('../models/member.js');
+var Event = require('../models/event.js');
+var Survey = require('../models/survey.js');
+var Email = require('../models/email.js');
+
 exports.index = function(req, res){
     console.log(req.user);
     Member.find().sort({_id:-1}).execFind(function(err, docs) {
@@ -19,20 +23,58 @@ exports.index = function(req, res){
 };
 exports.show = function(req, res){
     var id = req.params.id;
-    Member.findOne({_id:id}).populate("Surveys Events Emails").exec(function (err, data){
-        if(err){
-            res.send({result:"FAIL", ERR:err});
-        }else{
-            res.send({member:data , result:"SUCCESS"});
-        }
-    });
-    /*Member.findOne({_id:id}, function (err, data){
+    /*Member.findOne({_id:id}).populate("Surveys Events Emails").exec(function (err, data){
         if(err){
             res.send({result:"FAIL", ERR:err});
         }else{
             res.send({member:data , result:"SUCCESS"});
         }
     });*/
+    Member.findOne({_id:id}, function (err, data){
+        if(err){
+            res.send({result:"FAIL", ERR:err});
+        }else{
+            res.send({member:data , result:"SUCCESS"});
+        }
+    });
+};
+exports.showEvents = function(req, res){
+    var memberId = req.params.memberId;
+    Event.find().sort({_id:-1}).execFind(function(err, docs) {
+        if(err){
+            res.send({result:"FAIL", ERR:err});
+        }else{
+            res.send({members:docs, result:"SUCCESS"});
+        }
+    });
+
+    /*Member.findOne({_id:memberId}, function (err, data){
+        if(err){
+            res.send({result:"FAIL", ERR:err});
+        }else{
+            res.send({member:data , result:"SUCCESS"});
+        }
+    });*/
+};
+exports.showEmails = function(req, res){
+    var memberId = req.params.memberId;
+    Member.findOne({_id:memberId}, function (err, data){
+        if(err){
+            res.send({result:"FAIL", ERR:err});
+        }else{
+            res.send({member:data , result:"SUCCESS"});
+        }
+    });
+};
+exports.showSurveys = function(req, res){
+    var memberId = req.params.memberId;
+    Member.findOne({_id:memberId}, function (err, data){
+        if(err){
+            res.send({result:"FAIL", ERR:err});
+        }else{
+            res.send({member:data , result:"SUCCESS"});
+        }
+    });
 };
 exports.create = function(req, res){
     //console.log(userRoles.user);
@@ -80,11 +122,38 @@ exports.destroy = function(req, res){
         return false;
     }
     var id = req.params.id;
-    Member.remove({_id:id}, function(err){
+    Member.findById(id, function (err, doc) {
         if(err){
             res.send({result:"FAIL", ERR:err});
         }else{
-            res.send({result:"SUCCESS"});
+            /*Event.remove({_Member:id}, function(err){
+                if(err){
+                    console.log("remove All Fail Events On Member");
+                }else{
+                    console.log("remove All Events On Member");
+                }
+            });
+            Survey.remove({_Member:id}, function(err){
+                if(err){
+                    console.log("remove All Fail Surveys On Member");
+                }else{
+                    console.log("remove All Surveys On Member");
+                }
+            });
+            Email.remove({_Member:id}, function(err){
+                if(err){
+                    console.log("remove All Fail Emails On Member");
+                }else{
+                    console.log("remove All Emails On Member");
+                }
+            });*/
+            doc.remove(function(err){
+                if(err){
+                    res.send({result:"FAIL", ERR:err});
+                }else{
+                    res.send({result:"SUCCESS"});
+                }
+            });
         }
     });
 };

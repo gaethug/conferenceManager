@@ -9,9 +9,6 @@
                 <td>#</td>
                 <td>이름</td>
                 <td>아이디</td>
-                <td>생성 이벤트</td>
-                <td>생성 설문</td>
-                <td>생성 이메일</td>
             </tr>
             </thead>
             <tbody>
@@ -19,9 +16,6 @@
                 <td>{{$index+1}}</td>
                 <td><a href="/memberMain/{{member._id}}">{{member.Name}}</a></td>
                 <td><a href="/memberMain/{{member._id}}">{{member.Id}}</a></td>
-                <td>{{member.Events.length}}개</td>
-                <td>{{member.Surveys.length}}개</td>
-                <td>{{member.Emails.length}}개</td>
             </tr>
             </tbody>
         </table>

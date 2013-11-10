@@ -22,12 +22,15 @@ cm.controller('emailCreateCtrl',function($rootScope,$routeParams,$location, $htt
         emailREST.create({},{
                 Title:$scope.something.Title,
                 Memo:$scope.something.Memo,
-                _Event:$scope.eventId,
-                _Member:$rootScope.User._id
+                _Event:$scope.eventId
             }
             ,function(data){
                 console.log(data);
-                $location.path('/emailList');
+                if($scope.eventId == null){
+                    $location.path('/emailList');
+                }else{
+                    $location.path('/eventMain/'+$scope.eventId);
+                }
             });
     };
 });
