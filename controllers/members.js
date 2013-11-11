@@ -34,17 +34,17 @@ exports.show = function(req, res){
         if(err){
             res.send({result:"FAIL", ERR:err});
         }else{
-            Event.findOne({"Creator._id":id}).exec(function (err, events){
+            Event.find({"Creator._id":id}).sort({_id:-1}).exec(function (err, events){
                 if(err){
                     res.send({result:"FAIL", ERR:err});
                 }else{
                     member.Events = events;
-                    Survey.findOne({"Creator._id":id}).exec(function (err, surveys){
+                    Survey.find({"Creator._id":id}).sort({_id:-1}).exec(function (err, surveys){
                         if(err){
                             res.send({result:"FAIL", ERR:err});
                         }else{
                             member.Surveys = surveys;
-                            Email.findOne({"Creator._id":id}).exec(function (err, emails){
+                            Email.find({"Creator._id":id}).sort({_id:-1}).exec(function (err, emails){
                                 if(err){
                                     res.send({result:"FAIL", ERR:err});
                                 }else{
