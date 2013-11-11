@@ -9,24 +9,24 @@
         <p>{{something.Id}}</p>
     </div>
 
-    <h5>이벤트 {{something.Events.length}}개</h5>
+    <h5>이벤트 {{Events.length}}개</h5>
     <ul class="list-group">
-        <li class="list-group-item" ng-if="something.Events.length == 0">없음</li>
-        <li class="list-group-item" ng-repeat="event in something.Events">
+        <li class="list-group-item" ng-if="Events.length == 0">없음</li>
+        <li class="list-group-item" ng-repeat="event in Events">
             <a href="/eventMain/{{event._id}}">{{event.Title}}</a>
         </li>
     </ul>
-    <h5>서베이 {{something.Surveys.length}}개</h5>
+    <h5>서베이 {{Surveys.length}}개</h5>
     <ul class="list-group">
-        <li class="list-group-item" ng-if="something.Surveys.length == 0">없음</li>
-        <li class="list-group-item" ng-repeat="survey in something.Surveys">
+        <li class="list-group-item" ng-if="Surveys.length == 0">없음</li>
+        <li class="list-group-item" ng-repeat="survey in Surveys">
             <a href="/surveyMain/{{survey._id}}">{{survey.Title}}</a>
         </li>
     </ul>
-    <h5>이메일 {{something.Emails.length}}개</h5>
+    <h5>이메일 {{Emails.length}}개</h5>
     <ul class="list-group">
-        <li class="list-group-item" ng-if="something.Emails.length == 0">없음</li>
-        <li class="list-group-item" ng-repeat="email in something.Emails">
+        <li class="list-group-item" ng-if="Emails.length == 0">없음</li>
+        <li class="list-group-item" ng-repeat="email in Emails">
             <a href="/emailMain/{{email._id}}">{{email.Title}}</a>
         </li>
     </ul>

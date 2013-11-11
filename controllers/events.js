@@ -19,6 +19,7 @@ exports.index = function(req, res){
         }
     });
 };
+
 exports.show = function(req, res){
     var id = req.params.id;
     Event.findOne({_id:id}).populate("Surveys Emails").exec(function (err, data){

@@ -57,8 +57,13 @@ cm.factory('Auth', function($http, $rootScope, $cookies){
         userRoles: userRoles
     };
 });
+cm.factory("memberDetailREST", function($resource) {
+    return $resource("/members/:memberId/:childName", {}, {
+        query:      {method: 'GET', cache:false}
+    });
+});
 cm.factory("memberREST", function($resource) {
-    return $resource("/members/:id", {}, {
+    return $resource("/members/:memberId", {}, {
         query:      {method: 'GET', cache:false},
         get:        {method: 'GET', cache:false},
         destroy:    {method: 'DELETE'},
@@ -67,7 +72,7 @@ cm.factory("memberREST", function($resource) {
     });
 });
 cm.factory("eventREST", function($resource) {
-    return $resource("/events/:id", {}, {
+    return $resource("", {url:"/events/:id"}, {
         query:      {method: 'GET', cache:false},
         get:        {method: 'GET', cache:false},
         destroy:    {method: 'DELETE'},

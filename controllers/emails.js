@@ -19,6 +19,7 @@ exports.index = function(req, res){
         }
     });
 };
+
 exports.show = function(req, res){
     var id = req.params.id;
     Email.findOne({_id:id}).populate("_Event").exec(function (err, data){

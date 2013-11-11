@@ -13,10 +13,10 @@ var Member = new Schema({
     Name:String,
     Id:String,
     Password:String,
-    role:{}
-    //Events:[{type: Schema.ObjectId, ref:"Event"}],
-    //Surveys:[{type: Schema.ObjectId, ref:"Survey"}],
-    //Emails:[{type: Schema.ObjectId, ref:"Email"}]
+    role:{},
+    Events:[],
+    Surveys:[],
+    Emails:[]
 });
 
 module.exports = mongoose.model('Member',Member);

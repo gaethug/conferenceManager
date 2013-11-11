@@ -5,11 +5,9 @@ exports.mapRoute = function (app, prefix) {
 
     app.get(prefix, prefixObj.index);
 
+
     // show
     app.get(prefix + '/:id', prefixObj.show);
-
-/*    // findByMemberId
-    app.get(prefix + '/member/:memberId', prefixObj.findByMember);*/
 
     // create
     app.post(prefix, prefixObj.create);
@@ -23,9 +21,7 @@ exports.mapRoute = function (app, prefix) {
     //etc
     switch (prefix) {
         case "/members":
-            /*app.get(prefix+"/:id/events/", prefixObj.showEvents);
-            app.get(prefix+"/:id/surveys/", prefixObj.showSurveys);
-            app.get(prefix+"/:id/emails/", prefixObj.showEmails);*/
+            app.get(prefix+"/:id/:childName", prefixObj.showDetail);
             break;
     }
 

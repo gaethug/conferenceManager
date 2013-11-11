@@ -32,45 +32,42 @@ exports.show = function(req, res){
     });*/
     Member.findOne({_id:id}).exec(function (err, member){
         var data = member;
-        data.Events = [];
-        data.Surveys = [];
-        data.Emails = [];
         if(err){
             res.send({result:"FAIL", ERR:err});
         }else{
-            Event.find({"Creator._id":id}).sort({_id:-1}).exec(function (err, events){
-                if(err){
-                    res.send({result:"FAIL", ERR:err});
-                }else{
-                    //console.log(events);
-                    events.forEach(function(event){
-                        data.Events.push(event);
-                    });
-                    Survey.find({"Creator._id":id}).sort({_id:-1}).exec(function (err, surveys){
-                        if(err){
-                            res.send({result:"FAIL", ERR:err});
-                        }else{
-                            //data.Surveys = surveys;
-                            surveys.forEach(function(survey){
-                                data.Surveys.push(survey);
-                            });
-                            Email.find({"Creator._id":id}).sort({_id:-1}).exec(function (err, emails){
-                                if(err){
-                                    res.send({result:"FAIL", ERR:err});
-                                }else{
-                                    //data.Emails = emails;
-                                    emails.forEach(function(email){
-                                        data.Emails.push(email);
-                                    });
-                                    res.send({member:data , result:"SUCCESS"});
-                                }
-                            });
-                        }
-                    });
-                }
-            });
+            res.send({member:data , result:"SUCCESS"});
         }
     });
+};
+exports.showDetail = function(req, res){
+    var id = req.params.memberId;
+    var childName =req.params.childName;
+    if(childName=="events"){
+        Event.find({_Member:id}).sort({_id:-1}).execFind(function(err, docs) {
+            if(err){
+                res.send({result:"FAIL", ERR:err});
+            }else{
+                res.send({events:docs, result:"SUCCESS"});
+            }
+        });
+    }else if(childName=="surveys"){
+        Survey.find({_Member:id}).sort({_id:-1}).execFind(function(err, docs) {
+            if(err){
+                res.send({result:"FAIL", ERR:err});
+            }else{
+                res.send({surveys:docs, result:"SUCCESS"});
+            }
+        });
+    }else if(childName=="emails"){
+        Email.find({_Member:id}).sort({_id:-1}).execFind(function(err, docs) {
+            if(err){
+                res.send({result:"FAIL", ERR:err});
+            }else{
+                res.send({emails:docs, result:"SUCCESS"});
+            }
+        });
+    }
+
 };
 exports.create = function(req, res){
     //console.log(userRoles.user);
