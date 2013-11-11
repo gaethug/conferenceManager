@@ -34,12 +34,27 @@ exports.show = function(req, res){
         if(err){
             res.send({result:"FAIL", ERR:err});
         }else{
-            Event.findOne({"Creator._id":id}).populate("Surveys Emails").exec(function (err, event){
+            Event.findOne({"Creator._id":id}).exec(function (err, events){
                 if(err){
                     res.send({result:"FAIL", ERR:err});
                 }else{
-                    member.Event = event;
-                    res.send({member:member , result:"SUCCESS"});
+                    member.Events = events;
+                    Survey.findOne({"Creator._id":id}).exec(function (err, surveys){
+                        if(err){
+                            res.send({result:"FAIL", ERR:err});
+                        }else{
+                            member.Surveys = surveys;
+                            Email.findOne({"Creator._id":id}).exec(function (err, emails){
+                                if(err){
+                                    res.send({result:"FAIL", ERR:err});
+                                }else{
+                                    member.Emails = emails;
+
+                                    res.send({member:member , result:"SUCCESS"});
+                                }
+                            });
+                        }
+                    });
                 }
             });
         }
