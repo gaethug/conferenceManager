@@ -30,7 +30,11 @@ exports.show = function(req, res){
             res.send({member:data , result:"SUCCESS"});
         }
     });*/
-    Member.findOne({_id:id}, function (err, member){
+    Member.findOne({_id:id}).exec(function (err, member){
+        var data = member;
+        data.Events = [];
+        data.Surveys = [];
+        data.Emails = [];
         if(err){
             res.send({result:"FAIL", ERR:err});
         }else{
@@ -38,19 +42,27 @@ exports.show = function(req, res){
                 if(err){
                     res.send({result:"FAIL", ERR:err});
                 }else{
-                    member.Events = events;
+                    //console.log(events);
+                    events.forEach(function(event){
+                        data.Events.push(event);
+                    });
                     Survey.find({"Creator._id":id}).sort({_id:-1}).exec(function (err, surveys){
                         if(err){
                             res.send({result:"FAIL", ERR:err});
                         }else{
-                            member.Surveys = surveys;
+                            //data.Surveys = surveys;
+                            surveys.forEach(function(survey){
+                                data.Surveys.push(survey);
+                            });
                             Email.find({"Creator._id":id}).sort({_id:-1}).exec(function (err, emails){
                                 if(err){
                                     res.send({result:"FAIL", ERR:err});
                                 }else{
-                                    member.Emails = emails;
-
-                                    res.send({member:member , result:"SUCCESS"});
+                                    //data.Emails = emails;
+                                    emails.forEach(function(email){
+                                        data.Emails.push(email);
+                                    });
+                                    res.send({member:data , result:"SUCCESS"});
                                 }
                             });
                         }

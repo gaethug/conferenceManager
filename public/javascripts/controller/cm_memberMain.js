@@ -11,6 +11,7 @@ cm.controller('memberMainCtrl',function($rootScope,$routeParams,$location, $http
     $scope.Emails = [];
     $scope.Surveys = [];
     memberREST.get({id:$routeParams.memberId}, function(data){
+        console.log(data);
         $scope.something = data.member;
 
     });
