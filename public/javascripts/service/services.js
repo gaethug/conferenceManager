@@ -72,7 +72,7 @@ cm.factory("memberREST", function($resource) {
     });
 });
 cm.factory("eventREST", function($resource) {
-    return $resource("", {url:"/events/:id"}, {
+    return $resource("/events/:id", {}, {
         query:      {method: 'GET', cache:false},
         get:        {method: 'GET', cache:false},
         destroy:    {method: 'DELETE'},
