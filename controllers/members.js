@@ -30,49 +30,18 @@ exports.show = function(req, res){
             res.send({member:data , result:"SUCCESS"});
         }
     });*/
-    Member.findOne({_id:id}, function (err, data){
+    Member.findOne({_id:id}, function (err, member){
         if(err){
             res.send({result:"FAIL", ERR:err});
         }else{
-            res.send({member:data , result:"SUCCESS"});
-        }
-    });
-};
-exports.showEvents = function(req, res){
-    var memberId = req.params.memberId;
-    Event.find().sort({_id:-1}).execFind(function(err, docs) {
-        if(err){
-            res.send({result:"FAIL", ERR:err});
-        }else{
-            res.send({members:docs, result:"SUCCESS"});
-        }
-    });
-
-    /*Member.findOne({_id:memberId}, function (err, data){
-        if(err){
-            res.send({result:"FAIL", ERR:err});
-        }else{
-            res.send({member:data , result:"SUCCESS"});
-        }
-    });*/
-};
-exports.showEmails = function(req, res){
-    var memberId = req.params.memberId;
-    Member.findOne({_id:memberId}, function (err, data){
-        if(err){
-            res.send({result:"FAIL", ERR:err});
-        }else{
-            res.send({member:data , result:"SUCCESS"});
-        }
-    });
-};
-exports.showSurveys = function(req, res){
-    var memberId = req.params.memberId;
-    Member.findOne({_id:memberId}, function (err, data){
-        if(err){
-            res.send({result:"FAIL", ERR:err});
-        }else{
-            res.send({member:data , result:"SUCCESS"});
+            Event.findOne({"Creator._id":id}).populate("Surveys Emails").exec(function (err, event){
+                if(err){
+                    res.send({result:"FAIL", ERR:err});
+                }else{
+                    member.Event = event;
+                    res.send({member:member , result:"SUCCESS"});
+                }
+            });
         }
     });
 };

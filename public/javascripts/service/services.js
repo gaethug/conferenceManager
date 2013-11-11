@@ -66,7 +66,6 @@ cm.factory("memberREST", function($resource) {
         create:     {method: 'POST'}
     });
 });
-
 cm.factory("eventREST", function($resource) {
     return $resource("/events/:id", {}, {
         query:      {method: 'GET', cache:false},
